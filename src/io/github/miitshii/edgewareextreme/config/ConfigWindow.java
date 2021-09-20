@@ -10,13 +10,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
-import java.io.InputStream;
 
 public class ConfigWindow extends JFrame {
 
     private EdgewareExtreme controller;
 
-    ConfigWindow(EdgewareExtreme controller) {
+    public ConfigWindow(EdgewareExtreme controller) {
         this.controller = controller;
 
         setTitle("EdgewareExtreme Config");
@@ -59,21 +58,11 @@ public class ConfigWindow extends JFrame {
             PopupMenu popupMenu = new PopupMenu();
 
             MenuItem openConfig = new MenuItem("Config");
-            openConfig.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    setVisible(true);
-                }
-            });
+            openConfig.addActionListener(e -> setVisible(true));
             popupMenu.add(openConfig);
 
             MenuItem performPanic = new MenuItem("Panic");
-            performPanic.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    controller.panic();
-                }
-            });
+            performPanic.addActionListener(e -> controller.panic());
             popupMenu.add(performPanic);
 
             trayIcon.setPopupMenu(popupMenu);
