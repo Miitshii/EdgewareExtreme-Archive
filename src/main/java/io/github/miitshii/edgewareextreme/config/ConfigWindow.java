@@ -20,7 +20,7 @@ public class ConfigWindow extends JFrame {
 
         setTitle("EdgewareExtreme Config");
         try {
-            setIconImage(ImageIO.read(getClass().getResource("/resources/images/smiling-face-with-horns_1f608.png")));
+            setIconImage(ImageIO.read(getClass().getResourceAsStream("/images/smiling-face-with-horns_1f608.png")));
         } catch (IOException e) {
             e.printStackTrace();
         }
