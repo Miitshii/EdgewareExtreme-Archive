@@ -10,7 +10,7 @@ public class EdgewareExtreme {
     EdgewareExtreme() {
         try {
             FlatLightLaf.setup();
-            UIManager.setLookAndFeel(new FlatLightLaf());
+            UIManager.setLookAndFeel("com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatNightOwlContrastIJTheme");
         } catch (Exception e) {
             e.printStackTrace();
         }
