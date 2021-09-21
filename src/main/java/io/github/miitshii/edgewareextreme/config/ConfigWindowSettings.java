@@ -1,5 +1,7 @@
 package io.github.miitshii.edgewareextreme.config;
 
+import io.github.miitshii.edgewareextreme.components.SettingsSlider;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
@@ -21,6 +23,7 @@ public class ConfigWindowSettings extends JPanel {
         annoyanceSettings.setLayout(gbl);
         annoyanceSettings.setBorder(new TitledBorder(BorderFactory.createLineBorder(UIManager.getColor("Borders.color")), "Annoyance"));
 
+        annoyanceSettings.add(new SettingsSlider("Time Delay (ms)", 10, 6000, gbl, 0));
 
         add(annoyanceSettings);
     }
