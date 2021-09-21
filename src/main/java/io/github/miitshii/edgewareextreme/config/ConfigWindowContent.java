@@ -4,19 +4,20 @@ import javax.swing.*;
 
 public class ConfigWindowContent extends JPanel {
 
-    private ConfigWindow parent;
     private SpringLayout layout;
-    private ConfigWindowScroller scroller;
+    private ConfigWindowQuickSetup quickSetup;
+    private ConfigWindowSettings settings;
+    private JTabbedPane tabbedPane;
 
-    public ConfigWindowContent(ConfigWindow parent) {
-        this.parent = parent;
-
+    public ConfigWindowContent() {
         setLayout(layout = new SpringLayout());
-        add(scroller = new ConfigWindowScroller(this));
-        layout.putConstraint(SpringLayout.NORTH, this, 0, SpringLayout.NORTH, scroller);
-        layout.putConstraint(SpringLayout.EAST, this, 0, SpringLayout.EAST, scroller);
-        layout.putConstraint(SpringLayout.SOUTH, this, 0, SpringLayout.SOUTH, scroller);
-        layout.putConstraint(SpringLayout.WEST, this, 0, SpringLayout.WEST, scroller);
+        add(tabbedPane = new JTabbedPane());
+        tabbedPane.addTab("QUICK SETUP", quickSetup = new ConfigWindowQuickSetup());
+        tabbedPane.addTab("SETTINGS", settings = new ConfigWindowSettings());
+        layout.putConstraint(SpringLayout.NORTH, this, 0, SpringLayout.NORTH, tabbedPane);
+        layout.putConstraint(SpringLayout.EAST, this, 0, SpringLayout.EAST, tabbedPane);
+        layout.putConstraint(SpringLayout.SOUTH, this, 0, SpringLayout.SOUTH, tabbedPane);
+        layout.putConstraint(SpringLayout.WEST, this, 0, SpringLayout.WEST, tabbedPane);
     }
 
 }

@@ -13,11 +13,9 @@ import java.io.IOException;
 
 public class ConfigWindow extends JFrame {
 
-    private EdgewareExtreme controller;
+    private ConfigWindowContent configWindowContent;
 
-    public ConfigWindow(EdgewareExtreme controller) {
-        this.controller = controller;
-
+    public ConfigWindow() {
         setTitle("EdgewareExtreme Config");
         try {
             setIconImage(ImageIO.read(getClass().getResourceAsStream("/images/smiling-face-with-horns_1f608.png")));
@@ -26,7 +24,7 @@ public class ConfigWindow extends JFrame {
         }
         Dimension size = new Dimension(800, 500);
         setSize(size);
-        setContentPane(new ConfigWindowContent(this));
+        setContentPane(configWindowContent = new ConfigWindowContent());
         getContentPane().setSize(size);
         setResizable(false);
         setLocationRelativeTo(null);
@@ -62,7 +60,7 @@ public class ConfigWindow extends JFrame {
             popupMenu.add(openConfig);
 
             MenuItem performPanic = new MenuItem("Panic");
-            performPanic.addActionListener(e -> controller.panic());
+            performPanic.addActionListener(e -> EdgewareExtreme.$.panic());
             popupMenu.add(performPanic);
 
             trayIcon.setPopupMenu(popupMenu);

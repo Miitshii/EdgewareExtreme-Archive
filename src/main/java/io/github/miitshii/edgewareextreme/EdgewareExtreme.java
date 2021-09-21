@@ -7,7 +7,15 @@ import javax.swing.*;
 
 public class EdgewareExtreme {
 
-    EdgewareExtreme() {
+    public static EdgewareExtreme INSTANCE;
+    public static EdgewareExtreme $;
+
+    private ConfigWindow configWindow;
+
+    public EdgewareExtreme() {
+        INSTANCE = this;
+        $ = this;
+
         try {
             FlatLightLaf.setup();
             UIManager.setLookAndFeel("com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatNightOwlContrastIJTheme");
@@ -15,7 +23,7 @@ public class EdgewareExtreme {
             e.printStackTrace();
         }
 
-        new ConfigWindow(this);
+        configWindow = new ConfigWindow();
     }
 
     public void panic() {
