@@ -15,5 +15,6 @@
     <orderEntry type="library" name="Maven: com.formdev:flatlaf:1.6" level="project" />
     <orderEntry type="library" name="Maven: com.formdev:flatlaf-intellij-themes:1.6" level="project" />
     <orderEntry type="library" name="Maven: com.google.code.gson:gson:2.8.8" level="project" />
+    <orderEntry type="library" name="jnativehook-2.1.0" level="project" />
   </component>
 </module>

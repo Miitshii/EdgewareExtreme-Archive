@@ -1,14 +1,15 @@
 package io.github.miitshii.edgewareextreme.config;
 
-import io.github.miitshii.edgewareextreme.settings.BasicGBC;
-import io.github.miitshii.edgewareextreme.settings.GsonSettings;
-import io.github.miitshii.edgewareextreme.settings.SettingsSlider;
+import io.github.miitshii.edgewareextreme.settings.*;
 
 import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+import javax.xml.crypto.dsig.keyinfo.KeyValue;
 import java.awt.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 public class ConfigWindowSettings extends JPanel {
 
@@ -30,10 +31,7 @@ public class ConfigWindowSettings extends JPanel {
         generalSettings.setBorder(new CompoundBorder(new TitledBorder(BorderFactory.createLineBorder(UIManager.getColor("Borders.color")), "General Settings"), new EmptyBorder(5, 5, 5, 5)));
 
         int gridy = 0;
-        JLabel panicLabel = new JLabel("Panic Key:");
-        gbl.setConstraints(panicLabel, new BasicGBC(0, gridy, 1, 1, 0, 0, GridBagConstraints.NONE, GridBagConstraints.WEST));
-        JButton changePanicKey = new JButton();
-        
+        new SettingPanic(generalSettings, gbl, gridy++);
 
         add(generalSettings);
         layout.setConstraints(generalSettings, new BasicGBC(0, configGridY++, 1, 1, 1, 0, GridBagConstraints.HORIZONTAL, GridBagConstraints.NORTH));

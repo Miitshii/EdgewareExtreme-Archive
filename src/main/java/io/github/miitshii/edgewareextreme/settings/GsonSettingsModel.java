@@ -4,10 +4,43 @@ import io.github.miitshii.edgewareextreme.settings.AbstractSetting;
 
 public class GsonSettingsModel {
 
+    private Integer panicButton;
+    private Integer panicButtonModifiers;
+    private Boolean panicButtonEnabled;
     private Double annoyanceDelay;
     private Double annoyanceFrequency;
     private Double annoyanceTimeout;
     private Double annoyanceMitosis;
+
+    public Integer getPanicButton() {
+        if (panicButton == null) return 0x20; // VK_SPACE
+        return panicButton;
+    }
+
+    public void setPanicButton(Integer panicButton) {
+        this.panicButton = panicButton;
+        updateAll();
+    }
+
+    public Integer getPanicButtonModifiers() {
+        if (panicButtonModifiers == null) return 0;
+        return panicButtonModifiers;
+    }
+
+    public void setPanicButtonModifiers(Integer panicButtonModifiers) {
+        this.panicButtonModifiers = panicButtonModifiers;
+        updateAll();
+    }
+
+    public Boolean getPanicButtonEnabled() {
+        if (panicButtonEnabled == null) return true;
+        return panicButtonEnabled;
+    }
+
+    public void setPanicButtonEnabled(Boolean panicButtonEnabled) {
+        this.panicButtonEnabled = panicButtonEnabled;
+        updateAll();
+    }
 
     public Double getAnnoyanceDelay() {
         if (annoyanceDelay == null) return 1000D;

@@ -63,6 +63,10 @@ public class ConfigWindow extends JFrame {
             performPanic.addActionListener(e -> EdgewareExtreme.$.panic());
             popupMenu.add(performPanic);
 
+            MenuItem quit = new MenuItem("Quit");
+            quit.addActionListener(e -> EdgewareExtreme.$.quit());
+            popupMenu.add(quit);
+
             trayIcon.setPopupMenu(popupMenu);
 
             SystemTray systemTray = SystemTray.getSystemTray();

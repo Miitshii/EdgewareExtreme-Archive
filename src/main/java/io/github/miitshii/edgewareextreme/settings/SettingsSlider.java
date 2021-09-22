@@ -9,7 +9,7 @@ import java.util.function.Consumer;
 
 public class SettingsSlider extends AbstractSetting<Double> {
 
-    private JLabel text;
+    private JLabel label;
     private JSlider slider;
     private JSpinner spinner;
 
@@ -18,12 +18,11 @@ public class SettingsSlider extends AbstractSetting<Double> {
             setGet(get);
             setSet(set);
 
-            container.add(this.text = new JLabel(text));
-            gbl.setConstraints(this.text, new BasicGBC(0, gridY, 1, 1, 0, 0, GridBagConstraints.NONE, GridBagConstraints.WEST));
+            container.add(label = new JLabel(text));
+            gbl.setConstraints(label, new BasicGBC(0, gridY, 1, 1, 0, 0, GridBagConstraints.NONE, GridBagConstraints.WEST));
 
             slider = new JSlider((int)min, (int) max, (int)getValue().doubleValue());
             gbl.setConstraints(slider, new BasicGBC(1, gridY, 1, 1, 1, 0, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER));
-            gbl.getConstraints(slider).fill = GridBagConstraints.HORIZONTAL;
             container.add(slider);
             slider.addChangeListener(e -> changeValue(slider.getValue(), false));
             slider.addMouseListener(new MouseAdapter() {
