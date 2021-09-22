@@ -10,8 +10,36 @@ public abstract class AbstractSetting<V> extends JPanel {
 
     public static final List<AbstractSetting> allSettings = new ArrayList<>();
 
-    public Callable<V> get;
-    public Consumer<V> set;
+    private Callable<V> get;
+    private Consumer<V> set;
+
+    public static List<AbstractSetting> getAllSettings() {
+        return allSettings;
+    }
+
+    public Callable<V> getGet() {
+        return get;
+    }
+
+    public V getValue() throws Exception {
+        return getGet().call();
+    }
+
+    public void setGet(Callable<V> get) {
+        this.get = get;
+    }
+
+    public Consumer<V> getSet() {
+        return set;
+    }
+
+    public void setValue(V value) {
+        getSet().accept(value);
+    }
+
+    public void setSet(Consumer<V> set) {
+        this.set = set;
+    }
 
     public abstract void update();
 

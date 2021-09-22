@@ -15,27 +15,27 @@ public class SettingsSlider extends AbstractSetting<Double> {
 
     public SettingsSlider(Callable<Double> get, Consumer<Double> set, String text, double min, double max, JPanel container, GridBagLayout gbl, int gridY) {
         try {
-            this.get = get;
-            this.set = set;
+            setGet(get);
+            setSet(set);
 
             container.add(this.text = new JLabel(text));
             gbl.setConstraints(this.text, new BasicGBC(0, gridY, 1, 1, 0, 0, GridBagConstraints.NONE, GridBagConstraints.WEST));
 
-            slider = new JSlider((int)min, (int) max, (int)get.call().doubleValue());
+            slider = new JSlider((int)min, (int) max, (int)getValue().doubleValue());
             gbl.setConstraints(slider, new BasicGBC(1, gridY, 1, 1, 1, 0, GridBagConstraints.HORIZONTAL, GridBagConstraints.CENTER));
             gbl.getConstraints(slider).fill = GridBagConstraints.HORIZONTAL;
             container.add(slider);
-            slider.addChangeListener(e -> updateValue(slider.getValue(), false));
+            slider.addChangeListener(e -> changeValue(slider.getValue(), false));
             slider.addMouseListener(new MouseAdapter() {
                 @Override
                 public void mouseReleased(MouseEvent e) {
-                    updateValue(slider.getValue(), true);
+                    changeValue(slider.getValue(), true);
                 }
             });
 
             container.add(spinner = new JSpinner());
-            spinner.setModel(new SpinnerNumberModel((double)get.call(), min, max, 1));
-            spinner.addChangeListener(e -> updateValue((double)spinner.getValue(), true));
+            spinner.setModel(new SpinnerNumberModel((double)getValue(), min, max, 1));
+            spinner.addChangeListener(e -> changeValue((double)spinner.getValue(), true));
             gbl.setConstraints(spinner, new BasicGBC(2, gridY, 1, 1, 0, 0, GridBagConstraints.NONE, GridBagConstraints.EAST));
         } catch (Exception e) {
             // should never happen
@@ -43,10 +43,10 @@ public class SettingsSlider extends AbstractSetting<Double> {
         }
     }
 
-    public void updateValue(double newValue, boolean save) {
+    public void changeValue(double newValue, boolean save) {
         slider.setValue((int) newValue);
         spinner.setValue(newValue);
-        set.accept(newValue);
+        setValue(newValue);
 
         if (save) {
             GsonSettings.$.saveConfig();
@@ -56,8 +56,8 @@ public class SettingsSlider extends AbstractSetting<Double> {
     @Override
     public void update() {
         try {
-            slider.setValue((int) get.call().doubleValue());
-            spinner.setValue(get.call());
+            slider.setValue((int) getValue().doubleValue());
+            spinner.setValue(getValue());
         } catch (Exception e) {
             // should never happen
             e.printStackTrace();
