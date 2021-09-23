@@ -1,6 +1,8 @@
 {
-  "panicButton": 0,
+  "panicButton": 65,
   "panicButtonModifiers": 192,
-  "panicButtonEnabled": true,
-  "annoyanceDelay": 14355.0
+  "panicButtonEnabled": false,
+  "annoyanceDelay": 9613.0,
+  "annoyanceFrequency": 16.0,
+  "annoyanceMitosis": 0.0
 }

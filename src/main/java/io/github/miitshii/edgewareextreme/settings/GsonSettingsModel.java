@@ -1,6 +1,7 @@
 package io.github.miitshii.edgewareextreme.settings;
 
-import io.github.miitshii.edgewareextreme.settings.AbstractSetting;
+import java.util.ArrayList;
+import java.util.List;
 
 public class GsonSettingsModel {
 
@@ -17,9 +18,10 @@ public class GsonSettingsModel {
         return panicButton;
     }
 
-    public void setPanicButton(Integer panicButton) {
-        this.panicButton = panicButton;
-        updateAll();
+    public final transient List<ISettingsListener<Integer>> panicButtonListeners = new ArrayList<>();
+    public void setPanicButton(Integer newValue) {
+        this.panicButton = newValue;
+        panicButtonListeners.forEach(setting -> setting.onUpdated(newValue));
     }
 
     public Integer getPanicButtonModifiers() {
@@ -27,9 +29,10 @@ public class GsonSettingsModel {
         return panicButtonModifiers;
     }
 
-    public void setPanicButtonModifiers(Integer panicButtonModifiers) {
-        this.panicButtonModifiers = panicButtonModifiers;
-        updateAll();
+    public final transient List<ISettingsListener<Integer>> panicButtonModifiersListeners = new ArrayList<>();
+    public void setPanicButtonModifiers(Integer newValue) {
+        this.panicButtonModifiers = newValue;
+        panicButtonModifiersListeners.forEach(setting -> setting.onUpdated(newValue));
     }
 
     public Boolean getPanicButtonEnabled() {
@@ -37,9 +40,10 @@ public class GsonSettingsModel {
         return panicButtonEnabled;
     }
 
-    public void setPanicButtonEnabled(Boolean panicButtonEnabled) {
-        this.panicButtonEnabled = panicButtonEnabled;
-        updateAll();
+    public final transient List<ISettingsListener<Boolean>> panicButtonEnabledListeners = new ArrayList<>();
+    public void setPanicButtonEnabled(Boolean newValue) {
+        this.panicButtonEnabled = newValue;
+        panicButtonEnabledListeners.forEach(setting -> setting.onUpdated(newValue));
     }
 
     public Double getAnnoyanceDelay() {
@@ -47,9 +51,10 @@ public class GsonSettingsModel {
         return annoyanceDelay;
     }
 
-    public void setAnnoyanceDelay(Double annoyanceDelay) {
-        this.annoyanceDelay = annoyanceDelay;
-        updateAll();
+    public final transient List<ISettingsListener<Double>> annoyanceDelayListeners = new ArrayList<>();
+    public void setAnnoyanceDelay(Double newValue) {
+        this.annoyanceDelay = newValue;
+        annoyanceDelayListeners.forEach(setting -> setting.onUpdated(newValue));
     }
 
     public Double getAnnoyanceFrequency() {
@@ -57,9 +62,10 @@ public class GsonSettingsModel {
         return annoyanceFrequency;
     }
 
-    public void setAnnoyanceFrequency(Double annoyanceFrequency) {
-        this.annoyanceFrequency = annoyanceFrequency;
-        updateAll();
+    public final transient List<ISettingsListener<Double>> annoyanceFrequencyListeners = new ArrayList<>();
+    public void setAnnoyanceFrequency(Double newValue) {
+        this.annoyanceFrequency = newValue;
+        annoyanceFrequencyListeners.forEach(setting -> setting.onUpdated(newValue));
     }
 
     public Double getAnnoyanceTimeout() {
@@ -67,9 +73,10 @@ public class GsonSettingsModel {
         return annoyanceTimeout;
     }
 
-    public void setAnnoyanceTimeout(Double annoyanceTimeout) {
-        this.annoyanceTimeout = annoyanceTimeout;
-        updateAll();
+    public final transient List<ISettingsListener<Double>> annoyanceTimeoutListeners = new ArrayList<>();
+    public void setAnnoyanceTimeout(Double newValue) {
+        this.annoyanceTimeout = newValue;
+        annoyanceTimeoutListeners.forEach(setting -> setting.onUpdated(newValue));
     }
 
     public Double getAnnoyanceMitosis() {
@@ -77,13 +84,10 @@ public class GsonSettingsModel {
         return annoyanceMitosis;
     }
 
-    public void setAnnoyanceMitosis(Double annoyanceMitosis) {
-        this.annoyanceMitosis = annoyanceMitosis;
-        updateAll();
-    }
-
-    public void updateAll() {
-        // TODO listeners
+    public final transient List<ISettingsListener<Double>> annoyanceMitosisListeners = new ArrayList<>();
+    public void setAnnoyanceMitosis(Double newValue) {
+        this.annoyanceMitosis = newValue;
+        annoyanceMitosisListeners.forEach(setting -> setting.onUpdated(newValue));
     }
 
 }

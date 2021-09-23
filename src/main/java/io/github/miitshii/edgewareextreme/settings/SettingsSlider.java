@@ -15,10 +15,11 @@ public class SettingsSlider extends AbstractSetting<Double> {
     private JSlider slider;
     private JSpinner spinner;
 
-    public SettingsSlider(Callable<Double> get, Consumer<Double> set, String text, double min, double max, JPanel container, GridBagLayout gbl, int gridY) {
+    public SettingsSlider(Callable<Double> get, Consumer<Double> set, Consumer<AbstractSetting<Double>> addListener, String text, double min, double max, JPanel container, GridBagLayout gbl, int gridY) {
         try {
             setGet(get);
             setSet(set);
+            addListener.accept(this);
 
             container.add(label = new JLabel(text));
             gbl.setConstraints(label, new BasicGBC(0, gridY, 1, 1, 0, 0, GridBagConstraints.NONE, GridBagConstraints.WEST));
@@ -55,10 +56,10 @@ public class SettingsSlider extends AbstractSetting<Double> {
     }
 
     @Override
-    public void update() {
+    public void onUpdated(Double newValue) {
         try {
-            slider.setValue((int) getValue().doubleValue());
-            spinner.setValue(getValue());
+            slider.setValue((int) newValue.doubleValue());
+            spinner.setValue(newValue);
         } catch (Exception e) {
             // should never happen
             e.printStackTrace();

@@ -42,14 +42,14 @@ public class ConfigWindowSettings extends JPanel {
         JPanel annoyanceSettings = new JPanel();
         GridBagLayout gbl = new GridBagLayout();
         annoyanceSettings.setLayout(gbl);
-        annoyanceSettings.setBorder(new CompoundBorder(new TitledBorder(BorderFactory.createLineBorder(UIManager.getColor("Borders.color")), "Image Annoyance"), new EmptyBorder(5, 5, 5, 5)));
+        annoyanceSettings.setBorder(new CompoundBorder(new TitledBorder(BorderFactory.createLineBorder(UIManager.getColor("Borders.color")), "Annoyance"), new EmptyBorder(5, 5, 5, 5)));
 
         int gridy = 0;
         final GsonSettingsModel m = EdgewareExtreme.$.getSettingsModel();
-        new SettingsSlider(EdgewareExtreme.$.getSettingsModel()::getAnnoyanceDelay, EdgewareExtreme.$.getSettingsModel()::setAnnoyanceDelay, "Time Delay (ms)", 10, 60000, annoyanceSettings, gbl, gridy++);
-        new SettingsSlider(m::getAnnoyanceFrequency, m::setAnnoyanceFrequency, "Popup Frequency (%)", 0, 100, annoyanceSettings, gbl, gridy++);
-        new SettingsSlider(m::getAnnoyanceTimeout, m::setAnnoyanceTimeout, "Popup Timeout (ms)", -1, 60000, annoyanceSettings, gbl, gridy++);
-        new SettingsSlider(m::getAnnoyanceMitosis, m::setAnnoyanceMitosis, "Mitosis Amount", -1, 10, annoyanceSettings, gbl, gridy++);
+        new SettingsSlider(m::getAnnoyanceDelay, m::setAnnoyanceDelay, m.annoyanceDelayListeners::add, "Time Delay (ms)", 10, 60000, annoyanceSettings, gbl, gridy++);
+        new SettingsSlider(m::getAnnoyanceFrequency, m::setAnnoyanceFrequency, m.annoyanceFrequencyListeners::add,"Popup Frequency (%)", 0, 100, annoyanceSettings, gbl, gridy++);
+        new SettingsSlider(m::getAnnoyanceTimeout, m::setAnnoyanceTimeout, m.annoyanceTimeoutListeners::add,"Popup Timeout (ms)", -1, 60000, annoyanceSettings, gbl, gridy++);
+        new SettingsSlider(m::getAnnoyanceMitosis, m::setAnnoyanceMitosis, m.annoyanceMitosisListeners::add,"Mitosis Amount", 0, 10, annoyanceSettings, gbl, gridy++);
 
         add(annoyanceSettings);
         layout.setConstraints(annoyanceSettings, new BasicGBC(0, configGridY++, 1, 1, 1, 0, GridBagConstraints.HORIZONTAL, GridBagConstraints.NORTH));

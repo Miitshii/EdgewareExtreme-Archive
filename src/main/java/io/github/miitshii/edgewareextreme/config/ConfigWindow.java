@@ -10,6 +10,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
+import java.util.Observable;
+import java.util.Observer;
 
 public class ConfigWindow extends JFrame {
 

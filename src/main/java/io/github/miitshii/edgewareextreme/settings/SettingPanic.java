@@ -9,7 +9,7 @@ import java.awt.event.KeyEvent;
 import java.util.concurrent.Callable;
 import java.util.function.Consumer;
 
-public class SettingPanic extends AbstractSetting {
+public class SettingPanic extends AbstractSetting<Object> {
 
     public static JTextField INPUT_INSTANCE;
 
@@ -19,6 +19,10 @@ public class SettingPanic extends AbstractSetting {
 
     public SettingPanic(JPanel container, GridBagLayout gbl, int gridY) {
         try {
+            EdgewareExtreme.$.getSettingsModel().panicButtonListeners.add(newValue -> SettingPanic.this.onUpdated(null));
+            EdgewareExtreme.$.getSettingsModel().panicButtonModifiersListeners.add(newValue -> SettingPanic.this.onUpdated(null));
+            EdgewareExtreme.$.getSettingsModel().panicButtonEnabledListeners.add(newValue -> SettingPanic.this.onUpdated(null));
+
             container.add(label = new JLabel("Panic Button"));
             gbl.setConstraints(label, new BasicGBC(0, gridY, 1, 1, 0, 0, GridBagConstraints.NONE, GridBagConstraints.WEST));
 
@@ -79,9 +83,10 @@ public class SettingPanic extends AbstractSetting {
     }
 
     @Override
-    public void update() {
+    public void onUpdated(Object newValue) {
         try {
             input.setText(panicToString());
+            checkbox.setSelected(EdgewareExtreme.$.getSettingsModel().getPanicButtonEnabled());
         } catch (Exception e) {
             // should never happen
             e.printStackTrace();

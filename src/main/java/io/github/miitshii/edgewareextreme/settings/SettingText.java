@@ -53,9 +53,9 @@ public class SettingText extends AbstractSetting<String> {
     }
 
     @Override
-    public void update() {
+    public void onUpdated(String newValue) {
         try {
-            input.setText(getValue());
+            input.setText(newValue);
         } catch (Exception e) {
             // should never happen
             e.printStackTrace();

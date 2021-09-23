@@ -6,14 +6,14 @@ import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.function.Consumer;
 
-public abstract class AbstractSetting<V> extends JPanel {
+public abstract class AbstractSetting<V> extends JPanel implements ISettingsListener<V> {
 
-    public static final List<AbstractSetting> allSettings = new ArrayList<>();
+    public static final List<AbstractSetting<?>> allSettings = new ArrayList<>();
 
     private Callable<V> get;
     private Consumer<V> set;
 
-    public static List<AbstractSetting> getAllSettings() {
+    public static List<AbstractSetting<?>> getAllSettings() {
         return allSettings;
     }
 
@@ -40,8 +40,6 @@ public abstract class AbstractSetting<V> extends JPanel {
     public void setSet(Consumer<V> set) {
         this.set = set;
     }
-
-    public abstract void update();
 
     {
         allSettings.add(this);
