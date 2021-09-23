@@ -38,7 +38,7 @@ public class SettingsSlider extends AbstractSetting<Double> {
             container.add(spinner = new JSpinner());
             spinner.setModel(new SpinnerNumberModel((double)getValue(), min, max, 1));
             spinner.addChangeListener(e -> changeValue((double)spinner.getValue(), true));
-            gbl.setConstraints(spinner, new BasicGBC(2, gridY, 1, 1, 0, 0, GridBagConstraints.NONE, GridBagConstraints.EAST));
+            gbl.setConstraints(spinner, new BasicGBC(2, gridY, 1, 1, 0, 0, GridBagConstraints.HORIZONTAL, GridBagConstraints.EAST));
         } catch (Exception e) {
             // should never happen
             e.printStackTrace();

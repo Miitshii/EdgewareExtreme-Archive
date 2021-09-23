@@ -9,7 +9,9 @@ public class GsonSettingsModel {
     private Integer panicButtonModifiers;
     private Boolean panicButtonEnabled;
     private String mediaPath;
-    private Double hibernateTime;
+    private Double hibernateTimeMin;
+    private Double hibernateTimeMax;
+    private Double hibernateRepeats;
     private Double annoyanceDelay;
     private Double annoyanceFrequency;
     private Double annoyanceTimeout;
@@ -59,15 +61,34 @@ public class GsonSettingsModel {
         mediaPathListeners.forEach(setting -> setting.onUpdated(newValue));
     }
 
-    public Double getHibernateTime() {
-        if (hibernateTime == null) return 0D;
-        return hibernateTime;
+    public Double getHibernateTimeMin() {
+        if (hibernateTimeMin == null) return 0D;
+        return hibernateTimeMin;
+    }
+    public final transient List<ISettingsListener<Double>> hibernateTimeMinListeners = new ArrayList<>();
+    public void setHibernateTimeMin(Double newValue) {
+        this.hibernateTimeMin = newValue;
+        hibernateTimeMinListeners.forEach(setting -> setting.onUpdated(newValue));
     }
 
-    public final transient List<ISettingsListener<Double>> hibernateTimeListeners = new ArrayList<>();
-    public void setHibernateTime(Double newValue) {
-        this.hibernateTime = newValue;
-        hibernateTimeListeners.forEach(setting -> setting.onUpdated(newValue));
+    public Double getHibernateTimeMax() {
+        if (hibernateTimeMax == null) return 60000D;
+        return hibernateTimeMax;
+    }
+    public final transient List<ISettingsListener<Double>> hibernateTimeMaxListeners = new ArrayList<>();
+    public void setHibernateTimeMax(Double newValue) {
+        this.hibernateTimeMax = newValue;
+        hibernateTimeMaxListeners.forEach(setting -> setting.onUpdated(newValue));
+    }
+
+    public Double getHibernateRepeats() {
+        if (hibernateRepeats == null) return 3D;
+        return hibernateRepeats;
+    }
+    public final transient List<ISettingsListener<Double>> hibernateRepeatsListeners = new ArrayList<>();
+    public void setHibernateRepeats(Double newValue) {
+        this.hibernateRepeats = newValue;
+        hibernateRepeatsListeners.forEach(setting -> setting.onUpdated(newValue));
     }
 
     public Double getAnnoyanceDelay() {
@@ -104,7 +125,7 @@ public class GsonSettingsModel {
     }
 
     public Double getAnnoyanceMitosis() {
-        if (annoyanceMitosis == null) return -1D;
+        if (annoyanceMitosis == null) return 0D;
         return annoyanceMitosis;
     }
 

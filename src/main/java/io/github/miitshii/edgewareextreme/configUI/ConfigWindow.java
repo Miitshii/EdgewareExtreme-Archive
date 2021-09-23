@@ -1,17 +1,13 @@
-package io.github.miitshii.edgewareextreme.config;
+package io.github.miitshii.edgewareextreme.configUI;
 
 import io.github.miitshii.edgewareextreme.EdgewareExtreme;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.IOException;
-import java.util.Observable;
-import java.util.Observer;
 
 public class ConfigWindow extends JFrame {
 

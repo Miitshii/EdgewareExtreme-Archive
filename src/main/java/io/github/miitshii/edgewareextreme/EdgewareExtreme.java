@@ -1,13 +1,13 @@
 package io.github.miitshii.edgewareextreme;
 
 import com.formdev.flatlaf.FlatLightLaf;
-import io.github.miitshii.edgewareextreme.config.ConfigWindow;
+import io.github.miitshii.edgewareextreme.configUI.ConfigWindow;
+import io.github.miitshii.edgewareextreme.events.DefaultTimeline;
 import io.github.miitshii.edgewareextreme.settings.GsonSettings;
 import io.github.miitshii.edgewareextreme.settings.GsonSettingsModel;
 import lombok.Getter;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class EdgewareExtreme {
 
@@ -23,6 +23,8 @@ public class EdgewareExtreme {
     private ConfigWindow configWindow;
     @Getter
     private PanicButtonListener panicButtonListener;
+    @Getter
+    private DefaultTimeline defaultTimeline;
 
     public EdgewareExtreme() {
         if (INSTANCE != null) {
@@ -41,11 +43,12 @@ public class EdgewareExtreme {
         gsonSettings = new GsonSettings();
         configWindow = new ConfigWindow();
         panicButtonListener = new PanicButtonListener();
+        defaultTimeline = new DefaultTimeline();
     }
 
     public void panic() {
-        // TODO panic
         System.out.println("PANIC");
+        defaultTimeline.stopAll();
     }
 
     public void quit() {

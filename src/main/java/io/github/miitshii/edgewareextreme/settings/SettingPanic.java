@@ -52,7 +52,7 @@ public class SettingPanic extends AbstractSetting<Object> {
             });
 
             checkbox = new JCheckBox("Enabled", EdgewareExtreme.$.getSettingsModel().getPanicButtonEnabled());
-            gbl.setConstraints(checkbox, new BasicGBC(2, gridY, 1, 1, 0, 0, GridBagConstraints.NONE, GridBagConstraints.EAST));
+            gbl.setConstraints(checkbox, new BasicGBC(2, gridY, 1, 1, 0, 0, GridBagConstraints.HORIZONTAL, GridBagConstraints.EAST));
             checkbox.addChangeListener(e -> {
                 EdgewareExtreme.$.getSettingsModel().setPanicButtonEnabled(checkbox.isSelected());
                 EdgewareExtreme.$.getGsonSettings().saveConfig();
@@ -86,6 +86,7 @@ public class SettingPanic extends AbstractSetting<Object> {
     public void onUpdated(Object newValue) {
         try {
             input.setText(panicToString());
+            input.setEnabled(EdgewareExtreme.$.getSettingsModel().getPanicButtonEnabled());
             checkbox.setSelected(EdgewareExtreme.$.getSettingsModel().getPanicButtonEnabled());
         } catch (Exception e) {
             // should never happen

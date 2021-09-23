@@ -1,4 +1,4 @@
-package io.github.miitshii.edgewareextreme.config;
+package io.github.miitshii.edgewareextreme.configUI;
 
 import io.github.miitshii.edgewareextreme.EdgewareExtreme;
 import io.github.miitshii.edgewareextreme.settings.*;
@@ -7,11 +7,7 @@ import javax.swing.*;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
-import javax.xml.crypto.dsig.keyinfo.KeyValue;
 import java.awt.*;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.security.spec.ECGenParameterSpec;
 
 public class ConfigWindowSettings extends JPanel {
 
@@ -24,6 +20,18 @@ public class ConfigWindowSettings extends JPanel {
 
         setupGeneralSettings();
         setupAnnoyanceSettings();
+
+        JButton start = new JButton("START");
+        start.setBackground(new Color(0x318E1F));
+        start.setForeground(Color.white);
+        start.setFont(start.getFont().deriveFont(Font.BOLD, 15));
+        start.setBorder(new EmptyBorder(5, 10, 5, 10));
+        start.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        start.addActionListener(e -> EdgewareExtreme.$.getDefaultTimeline().start());
+        GridBagConstraints buttonConstraints = new BasicGBC(0, 9, 1, 1, 1, 0, GridBagConstraints.NONE, GridBagConstraints.CENTER);
+        buttonConstraints.insets = new Insets(20, 0, 0, 0);
+        layout.setConstraints(start, buttonConstraints);
+        add(start);
     }
 
     private void setupGeneralSettings() {
@@ -36,6 +44,9 @@ public class ConfigWindowSettings extends JPanel {
         final GsonSettingsModel m = EdgewareExtreme.$.getSettingsModel();
         new SettingPanic(generalSettings, gbl, gridy++);
         new SettingFile(m::getMediaPath, m::setMediaPath, m.mediaPathListeners::add, "Media Path", generalSettings, gbl, gridy++);
+        new SettingsSlider(m::getHibernateTimeMin, m::setHibernateTimeMin, m.hibernateTimeMinListeners::add, "Hibernate Time Min (ms)", 0, 60000, generalSettings, gbl, gridy++);
+        new SettingsSlider(m::getHibernateTimeMax, m::setHibernateTimeMax, m.hibernateTimeMaxListeners::add, "Hibernate Time Max (ms)", 0, 60000, generalSettings, gbl, gridy++);
+        new SettingsSlider(m::getHibernateRepeats, m::setHibernateRepeats, m.hibernateRepeatsListeners::add, "Hibernate Activity", 0, 10, generalSettings, gbl, gridy++);
 
         add(generalSettings);
         layout.setConstraints(generalSettings, new BasicGBC(0, configGridY++, 1, 1, 1, 0, GridBagConstraints.HORIZONTAL, GridBagConstraints.NORTH));

@@ -29,6 +29,6 @@ public class SettingFile extends SettingText {
                 changeValue(fileChooser.getSelectedFile().getAbsolutePath(), true);
             }
         });
-        gbl.setConstraints(button, new BasicGBC(2, gridY, 1, 1, 0, 0, GridBagConstraints.NONE, GridBagConstraints.EAST));
+        gbl.setConstraints(button, new BasicGBC(2, gridY, 1, 1, 0, 0, GridBagConstraints.HORIZONTAL, GridBagConstraints.EAST));
     }
 }

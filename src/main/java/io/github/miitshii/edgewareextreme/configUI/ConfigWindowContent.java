@@ -1,4 +1,4 @@
-package io.github.miitshii.edgewareextreme.config;
+package io.github.miitshii.edgewareextreme.configUI;
 
 import javax.swing.*;
 
