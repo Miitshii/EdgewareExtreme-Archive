@@ -1,5 +1,7 @@
 package io.github.miitshii.edgewareextreme.settings;
 
+import io.github.miitshii.edgewareextreme.EdgewareExtreme;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -45,11 +47,11 @@ public class SettingPanic extends AbstractSetting {
                 }
             });
 
-            checkbox = new JCheckBox("Enabled", GsonSettings.M.getPanicButtonEnabled());
+            checkbox = new JCheckBox("Enabled", EdgewareExtreme.$.getSettingsModel().getPanicButtonEnabled());
             gbl.setConstraints(checkbox, new BasicGBC(2, gridY, 1, 1, 0, 0, GridBagConstraints.NONE, GridBagConstraints.EAST));
             checkbox.addChangeListener(e -> {
-                GsonSettings.M.setPanicButtonEnabled(checkbox.isSelected());
-                GsonSettings.$.saveConfig();
+                EdgewareExtreme.$.getSettingsModel().setPanicButtonEnabled(checkbox.isSelected());
+                EdgewareExtreme.$.getGsonSettings().saveConfig();
             });
             container.add(checkbox);
         } catch (Exception e) {
@@ -59,20 +61,20 @@ public class SettingPanic extends AbstractSetting {
     }
 
     public String panicToString() {
-        Integer key = GsonSettings.M.getPanicButton();
-        Integer modifiers = GsonSettings.M.getPanicButtonModifiers();
+        Integer key = EdgewareExtreme.$.getSettingsModel().getPanicButton();
+        Integer modifiers = EdgewareExtreme.$.getSettingsModel().getPanicButtonModifiers();
         return (modifiers != 0 ? KeyEvent.getModifiersExText(modifiers) : "")
                 + (key != KeyEvent.VK_UNDEFINED && modifiers != 0 ? " + " : "")
                 + (key != KeyEvent.VK_UNDEFINED ? KeyEvent.getKeyText(key) : "");
     }
 
     public void changeValue(Integer key, Integer modifiers, boolean save) {
-        GsonSettings.M.setPanicButton(key);
-        GsonSettings.M.setPanicButtonModifiers(modifiers);
+        EdgewareExtreme.$.getSettingsModel().setPanicButton(key);
+        EdgewareExtreme.$.getSettingsModel().setPanicButtonModifiers(modifiers);
         input.setText(panicToString());
 
         if (save) {
-            GsonSettings.$.saveConfig();
+            EdgewareExtreme.$.getGsonSettings().saveConfig();
         }
     }
 

@@ -1,5 +1,7 @@
 package io.github.miitshii.edgewareextreme.settings;
 
+import io.github.miitshii.edgewareextreme.EdgewareExtreme;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
@@ -48,7 +50,7 @@ public class SettingsSlider extends AbstractSetting<Double> {
         setValue(newValue);
 
         if (save) {
-            GsonSettings.$.saveConfig();
+            EdgewareExtreme.$.getGsonSettings().saveConfig();
         }
     }
 

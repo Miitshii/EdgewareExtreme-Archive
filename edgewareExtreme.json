@@ -1,5 +1,6 @@
 {
-  "panicButton": 65,
-  "panicButtonModifiers": 128,
-  "panicButtonEnabled": true
+  "panicButton": 0,
+  "panicButtonModifiers": 192,
+  "panicButtonEnabled": true,
+  "annoyanceDelay": 14355.0
 }

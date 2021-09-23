@@ -3,16 +3,16 @@ package io.github.miitshii.edgewareextreme.settings;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.stream.JsonReader;
+import lombok.Getter;
 
 import java.io.*;
 
 public class GsonSettings {
 
-    public static final GsonSettings INSTANCE = new GsonSettings();
-    public static final GsonSettings $ = INSTANCE;
     private static final String FILENAME = "edgewareExtreme.json";
 
-    public static GsonSettingsModel M;
+    @Getter
+    private GsonSettingsModel model;
 
     public GsonSettings() {
         loadConfig();
@@ -24,14 +24,17 @@ public class GsonSettings {
             if (f.exists()) {
                 JsonReader reader = new JsonReader(new FileReader(f));
                 Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                M = gson.fromJson(reader, GsonSettingsModel.class);
-                if (M == null) {
-                    M = new GsonSettingsModel();
+                model = gson.fromJson(reader, GsonSettingsModel.class);
+                if (model == null) {
+                    model = new GsonSettingsModel();
                 }
+                reader.close();
             } else {
-                M = new GsonSettingsModel();
+                model = new GsonSettingsModel();
             }
         } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -40,7 +43,7 @@ public class GsonSettings {
         try {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             FileWriter fw = new FileWriter(new File(FILENAME));
-            gson.toJson(M, GsonSettingsModel.class, fw);
+            gson.toJson(model, GsonSettingsModel.class, fw);
             fw.flush();
             fw.close();
         } catch (IOException e) {

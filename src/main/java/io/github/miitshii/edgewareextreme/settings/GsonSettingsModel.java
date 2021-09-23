@@ -83,11 +83,7 @@ public class GsonSettingsModel {
     }
 
     public void updateAll() {
-        for (AbstractSetting setting : AbstractSetting.allSettings) {
-            setting.update();
-        }
-        // save it literally every time??
-        GsonSettings.$.saveConfig();
+        // TODO listeners
     }
 
 }

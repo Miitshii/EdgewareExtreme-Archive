@@ -1,5 +1,6 @@
 package io.github.miitshii.edgewareextreme.config;
 
+import io.github.miitshii.edgewareextreme.EdgewareExtreme;
 import io.github.miitshii.edgewareextreme.settings.*;
 
 import javax.swing.*;
@@ -44,10 +45,11 @@ public class ConfigWindowSettings extends JPanel {
         annoyanceSettings.setBorder(new CompoundBorder(new TitledBorder(BorderFactory.createLineBorder(UIManager.getColor("Borders.color")), "Image Annoyance"), new EmptyBorder(5, 5, 5, 5)));
 
         int gridy = 0;
-        new SettingsSlider(GsonSettings.M::getAnnoyanceDelay, GsonSettings.M::setAnnoyanceDelay, "Time Delay (ms)", 10, 60000, annoyanceSettings, gbl, gridy++);
-        new SettingsSlider(GsonSettings.M::getAnnoyanceFrequency, GsonSettings.M::setAnnoyanceFrequency, "Popup Frequency (%)", 0, 100, annoyanceSettings, gbl, gridy++);
-        new SettingsSlider(GsonSettings.M::getAnnoyanceTimeout, GsonSettings.M::setAnnoyanceTimeout, "Popup Timeout (ms)", -1, 60000, annoyanceSettings, gbl, gridy++);
-        new SettingsSlider(GsonSettings.M::getAnnoyanceMitosis, GsonSettings.M::setAnnoyanceMitosis, "Mitosis Amount", -1, 10, annoyanceSettings, gbl, gridy++);
+        final GsonSettingsModel m = EdgewareExtreme.$.getSettingsModel();
+        new SettingsSlider(EdgewareExtreme.$.getSettingsModel()::getAnnoyanceDelay, EdgewareExtreme.$.getSettingsModel()::setAnnoyanceDelay, "Time Delay (ms)", 10, 60000, annoyanceSettings, gbl, gridy++);
+        new SettingsSlider(m::getAnnoyanceFrequency, m::setAnnoyanceFrequency, "Popup Frequency (%)", 0, 100, annoyanceSettings, gbl, gridy++);
+        new SettingsSlider(m::getAnnoyanceTimeout, m::setAnnoyanceTimeout, "Popup Timeout (ms)", -1, 60000, annoyanceSettings, gbl, gridy++);
+        new SettingsSlider(m::getAnnoyanceMitosis, m::setAnnoyanceMitosis, "Mitosis Amount", -1, 10, annoyanceSettings, gbl, gridy++);
 
         add(annoyanceSettings);
         layout.setConstraints(annoyanceSettings, new BasicGBC(0, configGridY++, 1, 1, 1, 0, GridBagConstraints.HORIZONTAL, GridBagConstraints.NORTH));

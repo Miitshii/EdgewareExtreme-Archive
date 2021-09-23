@@ -2,6 +2,7 @@ package io.github.miitshii.edgewareextreme;
 
 import com.google.gson.Gson;
 import io.github.miitshii.edgewareextreme.settings.GsonSettings;
+import io.github.miitshii.edgewareextreme.settings.GsonSettingsModel;
 import io.github.miitshii.edgewareextreme.settings.SettingPanic;
 import org.jnativehook.GlobalScreen;
 import org.jnativehook.NativeHookException;
@@ -37,10 +38,11 @@ public class PanicButtonListener implements NativeKeyListener {
     @Override
     public void nativeKeyPressed(NativeKeyEvent nativeKeyEvent) {
         int modifiers = nativeKeyEvent.getModifiers() * KeyEvent.SHIFT_DOWN_MASK;
-        if (modifiers == GsonSettings.M.getPanicButtonModifiers()) {
-            if (GsonSettings.M.getPanicButton() == 0
-                || nativeKeyEvent.getRawCode() == GsonSettings.M.getPanicButton()) {
-                if (GsonSettings.M.getPanicButtonEnabled()) {
+        GsonSettingsModel m = EdgewareExtreme.$.getSettingsModel();
+        if (modifiers == m.getPanicButtonModifiers()) {
+            if (m.getPanicButton() == 0
+                || nativeKeyEvent.getRawCode() == m.getPanicButton()) {
+                if (m.getPanicButtonEnabled()) {
                     if (!SettingPanic.INPUT_INSTANCE.hasFocus()) {
                         EdgewareExtreme.$.panic();
                     }

@@ -1,5 +1,7 @@
 package io.github.miitshii.edgewareextreme.settings;
 
+import io.github.miitshii.edgewareextreme.EdgewareExtreme;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
@@ -46,7 +48,7 @@ public class SettingText extends AbstractSetting<String> {
         setValue(newValue);
 
         if (save) {
-            GsonSettings.$.saveConfig();
+            EdgewareExtreme.$.getGsonSettings().saveConfig();
         }
     }
 
