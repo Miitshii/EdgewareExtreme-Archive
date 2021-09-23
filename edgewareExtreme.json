@@ -1,8 +1,10 @@
 {
-  "panicButton": 65,
+  "panicButton": 32,
   "panicButtonModifiers": 192,
-  "panicButtonEnabled": false,
+  "panicButtonEnabled": true,
+  "mediaPath": "D:\\Große Dateien\\rips",
   "annoyanceDelay": 9613.0,
   "annoyanceFrequency": 16.0,
+  "annoyanceTimeout": -1.0,
   "annoyanceMitosis": 0.0
 }

@@ -20,10 +20,11 @@ public class SettingText extends AbstractSetting<String> {
         return input;
     }
 
-    public SettingText(Callable<String> get, Consumer<String> set, String text, JPanel container, GridBagLayout gbl, int gridY) {
+    public SettingText(Callable<String> get, Consumer<String> set, Consumer<AbstractSetting<String>> addListener, String text, JPanel container, GridBagLayout gbl, int gridY) {
         try {
             setGet(get);
             setSet(set);
+            addListener.accept(this);
 
             container.add(label = new JLabel(text));
             gbl.setConstraints(label, new BasicGBC(0, gridY, 1, 1, 0, 0, GridBagConstraints.NONE, GridBagConstraints.WEST));
@@ -33,7 +34,7 @@ public class SettingText extends AbstractSetting<String> {
             container.add(input);
             input.addKeyListener(new KeyAdapter() {
                 @Override
-                public void keyTyped(KeyEvent e) {
+                public void keyReleased(KeyEvent e) {
                     changeValue(input.getText(), true);
                 }
             });

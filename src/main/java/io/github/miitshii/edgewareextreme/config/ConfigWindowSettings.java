@@ -11,6 +11,7 @@ import javax.xml.crypto.dsig.keyinfo.KeyValue;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.security.spec.ECGenParameterSpec;
 
 public class ConfigWindowSettings extends JPanel {
 
@@ -32,7 +33,9 @@ public class ConfigWindowSettings extends JPanel {
         generalSettings.setBorder(new CompoundBorder(new TitledBorder(BorderFactory.createLineBorder(UIManager.getColor("Borders.color")), "General Settings"), new EmptyBorder(5, 5, 5, 5)));
 
         int gridy = 0;
+        final GsonSettingsModel m = EdgewareExtreme.$.getSettingsModel();
         new SettingPanic(generalSettings, gbl, gridy++);
+        new SettingFile(m::getMediaPath, m::setMediaPath, m.mediaPathListeners::add, "Media Path", generalSettings, gbl, gridy++);
 
         add(generalSettings);
         layout.setConstraints(generalSettings, new BasicGBC(0, configGridY++, 1, 1, 1, 0, GridBagConstraints.HORIZONTAL, GridBagConstraints.NORTH));

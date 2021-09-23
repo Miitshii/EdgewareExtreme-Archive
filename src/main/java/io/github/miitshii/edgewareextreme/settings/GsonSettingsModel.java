@@ -8,6 +8,8 @@ public class GsonSettingsModel {
     private Integer panicButton;
     private Integer panicButtonModifiers;
     private Boolean panicButtonEnabled;
+    private String mediaPath;
+    private Double hibernateTime;
     private Double annoyanceDelay;
     private Double annoyanceFrequency;
     private Double annoyanceTimeout;
@@ -25,7 +27,7 @@ public class GsonSettingsModel {
     }
 
     public Integer getPanicButtonModifiers() {
-        if (panicButtonModifiers == null) return 0;
+        if (panicButtonModifiers == null) return 192; // Ctrl + Shift
         return panicButtonModifiers;
     }
 
@@ -44,6 +46,28 @@ public class GsonSettingsModel {
     public void setPanicButtonEnabled(Boolean newValue) {
         this.panicButtonEnabled = newValue;
         panicButtonEnabledListeners.forEach(setting -> setting.onUpdated(newValue));
+    }
+
+    public String getMediaPath() {
+        if (mediaPath == null) return "./media";
+        return mediaPath;
+    }
+
+    public final transient List<ISettingsListener<String>> mediaPathListeners = new ArrayList<>();
+    public void setMediaPath(String newValue) {
+        this.mediaPath = newValue;
+        mediaPathListeners.forEach(setting -> setting.onUpdated(newValue));
+    }
+
+    public Double getHibernateTime() {
+        if (hibernateTime == null) return 0D;
+        return hibernateTime;
+    }
+
+    public final transient List<ISettingsListener<Double>> hibernateTimeListeners = new ArrayList<>();
+    public void setHibernateTime(Double newValue) {
+        this.hibernateTime = newValue;
+        hibernateTimeListeners.forEach(setting -> setting.onUpdated(newValue));
     }
 
     public Double getAnnoyanceDelay() {
