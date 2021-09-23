@@ -27,7 +27,11 @@ public class ConfigWindowSettings extends JPanel {
         start.setFont(start.getFont().deriveFont(Font.BOLD, 15));
         start.setBorder(new EmptyBorder(5, 10, 5, 10));
         start.setCursor(new Cursor(Cursor.HAND_CURSOR));
-        start.addActionListener(e -> EdgewareExtreme.$.getDefaultTimeline().start());
+        start.addActionListener(e -> {
+            EdgewareExtreme.$.getDefaultTimeline().startQueue();
+            start.setEnabled(false);
+        });
+        EdgewareExtreme.$.getPanicPerformedListeners().add(() -> start.setEnabled(true));
         GridBagConstraints buttonConstraints = new BasicGBC(0, 9, 1, 1, 1, 0, GridBagConstraints.NONE, GridBagConstraints.CENTER);
         buttonConstraints.insets = new Insets(20, 0, 0, 0);
         layout.setConstraints(start, buttonConstraints);

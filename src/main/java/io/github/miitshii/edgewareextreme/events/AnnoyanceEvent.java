@@ -1,6 +1,7 @@
 package io.github.miitshii.edgewareextreme.events;
 
 import io.github.miitshii.edgewareextreme.EdgewareExtreme;
+import io.github.miitshii.edgewareextreme.annoyanceUI.AnnoyanceWindow;
 
 import java.util.Random;
 import java.util.Timer;
@@ -13,12 +14,13 @@ public class AnnoyanceEvent implements IEvent {
 
     @Override
     public void executeEvent(Timeline timeline) {
+        System.out.println("Annoyance Event executed!");
         Double chance = EdgewareExtreme.$.getSettingsModel().getAnnoyanceFrequency();
         Random r = new Random();
         if (r.nextDouble() <= chance/100D) {
             isWorking = true;
 
-            // pic
+            new AnnoyanceWindow();
 
             Timer t = new Timer();
             if (delayTask != null) delayTask.cancel();

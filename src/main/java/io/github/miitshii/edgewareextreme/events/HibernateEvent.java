@@ -14,6 +14,12 @@ public class HibernateEvent implements IEvent {
 
     @Override
     public void executeEvent(Timeline timeline) {
+        System.out.println("Hibernate Event executed!");
+
+        for (int i = 0; i < EdgewareExtreme.$.getSettingsModel().getHibernateRepeats(); i++) {
+            timeline.addToQueue(new AnnoyanceEvent(), HibernateEvent.this);
+        }
+
         Timer t = new Timer();
         Random r = new Random();
         long min = (long) EdgewareExtreme.$.getSettingsModel().getHibernateTimeMin().doubleValue();
@@ -24,7 +30,6 @@ public class HibernateEvent implements IEvent {
             public void run() {
                 isWorking = false;
                 System.out.println("Hibernate Event done!");
-                timeline.addToQueue(new AnnoyanceEvent(), HibernateEvent.this);
             }
         }, min + r.nextInt((int) (max - min)));
         isWorking = true;

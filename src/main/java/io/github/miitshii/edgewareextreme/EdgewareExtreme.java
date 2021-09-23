@@ -8,6 +8,8 @@ import io.github.miitshii.edgewareextreme.settings.GsonSettingsModel;
 import lombok.Getter;
 
 import javax.swing.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class EdgewareExtreme {
 
@@ -23,6 +25,8 @@ public class EdgewareExtreme {
     private ConfigWindow configWindow;
     @Getter
     private PanicButtonListener panicButtonListener;
+    @Getter
+    private List<IPanicPerformedListener> panicPerformedListeners = new ArrayList<>();
     @Getter
     private DefaultTimeline defaultTimeline;
 
@@ -48,7 +52,7 @@ public class EdgewareExtreme {
 
     public void panic() {
         System.out.println("PANIC");
-        defaultTimeline.stopAll();
+        panicPerformedListeners.forEach(panicButtonListener -> panicButtonListener.panicPerformed());
     }
 
     public void quit() {

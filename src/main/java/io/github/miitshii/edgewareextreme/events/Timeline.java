@@ -1,6 +1,8 @@
 package io.github.miitshii.edgewareextreme.events;
 
+import io.github.miitshii.edgewareextreme.EdgewareExtreme;
 import lombok.Getter;
+import lombok.SneakyThrows;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +14,7 @@ public abstract class Timeline extends Thread {
     // only do this in init!
     public void addToOriginalQueue(IEvent event) {
         originalQueue.add(event);
+        currentQueue.add(event);
     }
 
     private transient List<IEvent> currentQueue = new ArrayList<>();
@@ -20,31 +23,38 @@ public abstract class Timeline extends Thread {
     private transient int atCurrentEntry = 0;
 
     public Timeline() {
+        super("Timeline Thread");
+        EdgewareExtreme.$.getPanicPerformedListeners().add(this::stopAll);
+        start();
     }
 
-    @Override
-    public synchronized void start() {
+    public void startQueue() {
         if (running) return;
-        super.start();
+        System.out.println("Starting Timeline Queue");
         running = true;
-        currentQueue = originalQueue;
+        currentQueue = new ArrayList<>(originalQueue);
     }
 
+    @SneakyThrows
     @Override
     public void run() {
-        while (running) {
-            if (atCurrentEntry >= currentQueue.size()) {
-                // reached end, reset
-                currentQueue = originalQueue;
-                atCurrentEntry = 0;
-            }
+        System.out.println("Running!");
+        while (true) {
+            Thread.sleep(10); // 100 times a sec ; otherwise thread will get stuck?
+            if (running) {
+                if (atCurrentEntry >= currentQueue.size()) {
+                    // reached end, reset
+                    currentQueue = new ArrayList<>(originalQueue);
+                    atCurrentEntry = 0;
+                }
 
-            IEvent currentEvent = getCurrentEvent();
-            currentEvent.executeEvent(this);
-            while (currentEvent.isWorking()) {
-                ; // wait
+                IEvent currentEvent = getCurrentEvent();
+                currentEvent.executeEvent(this);
+                while (currentEvent.isWorking()) {
+                    ; // wait
+                }
+                atCurrentEntry++;
             }
-            atCurrentEntry++;
         }
     }
 
@@ -57,9 +67,10 @@ public abstract class Timeline extends Thread {
     }
 
     public void stopAll() {
+        System.out.println("Stopping Timeline");
         running = false;
         getCurrentEvent().cancelEvent();
-        currentQueue = originalQueue;
+        currentQueue = new ArrayList<>(originalQueue);
     }
 
 }
