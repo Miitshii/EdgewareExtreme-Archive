@@ -66,7 +66,7 @@ public class ConfigWindowSettings extends JPanel {
         final GsonSettingsModel m = EdgewareExtreme.$.getSettingsModel();
         new SettingsSlider(m::getAnnoyanceDelay, m::setAnnoyanceDelay, m.annoyanceDelayListeners::add, "Time Delay (ms)", 10, 60000, annoyanceSettings, gbl, gridy++);
         new SettingsSlider(m::getAnnoyanceFrequency, m::setAnnoyanceFrequency, m.annoyanceFrequencyListeners::add,"Popup Frequency (%)", 0, 100, annoyanceSettings, gbl, gridy++);
-        new SettingsSlider(m::getAnnoyanceTimeout, m::setAnnoyanceTimeout, m.annoyanceTimeoutListeners::add,"Popup Timeout (ms)", -1, 60000, annoyanceSettings, gbl, gridy++);
+        new SettingsSlider(m::getAnnoyanceTimeout, m::setAnnoyanceTimeout, m.annoyanceTimeoutListeners::add,"Popup Timeout (ms)", 0, 60000, annoyanceSettings, gbl, gridy++);
         new SettingsSlider(m::getAnnoyanceMitosis, m::setAnnoyanceMitosis, m.annoyanceMitosisListeners::add,"Mitosis Amount", 0, 10, annoyanceSettings, gbl, gridy++);
 
         add(annoyanceSettings);

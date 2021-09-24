@@ -114,7 +114,7 @@ public class GsonSettingsModel {
     }
 
     public Double getAnnoyanceTimeout() {
-        if (annoyanceTimeout == null) return -1D;
+        if (annoyanceTimeout == null) return 60000D;
         return annoyanceTimeout;
     }
 

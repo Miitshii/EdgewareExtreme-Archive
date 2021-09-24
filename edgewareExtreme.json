@@ -5,5 +5,6 @@
   "hibernateTimeMax": 3210.0,
   "hibernateRepeats": 5.0,
   "annoyanceDelay": 3685.0,
-  "annoyanceFrequency": 47.0
+  "annoyanceFrequency": 14.0,
+  "annoyanceTimeout": 60000.0
 }
