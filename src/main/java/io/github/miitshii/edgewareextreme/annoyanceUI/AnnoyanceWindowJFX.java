@@ -1,5 +1,6 @@
 package io.github.miitshii.edgewareextreme.annoyanceUI;
 
+import io.github.miitshii.edgewareextreme.EdgewareExtreme;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.value.ChangeListener;
@@ -21,8 +22,13 @@ import java.util.Random;
 
 public class AnnoyanceWindowJFX extends AnnoyanceWindow {
 
-    public AnnoyanceWindowJFX() {
+    public AnnoyanceWindowJFX() throws Exception {
         super();
+
+        if (VIDEOS.size() >= EdgewareExtreme.$.getSettingsModel().getVideoLimit()) {
+            dispose();
+            throw new IllegalStateException("Too many videos");
+        }
 
         JFXPanel VFXPanel = new JFXPanel();
 
@@ -62,9 +68,10 @@ public class AnnoyanceWindowJFX extends AnnoyanceWindow {
             setAutoSizeAndLocation(media.getWidth(), media.getHeight());
 
             viewer.getMediaPlayer().play();
-            viewer.getMediaPlayer().setVolume(0.2);
+            viewer.getMediaPlayer().setVolume(EdgewareExtreme.$.getSettingsModel().getVideoVolume()/100D);
 
             setVisible(true);
+            VIDEOS.add(this);
         });
     }
 

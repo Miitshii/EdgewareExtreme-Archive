@@ -31,7 +31,7 @@ public class HibernateEvent implements IEvent {
                 isWorking = false;
                 System.out.println("Hibernate Event done!");
             }
-        }, min + r.nextInt((int) (max - min)));
+        }, Math.max(1, min + r.nextInt((int) (max - min))));
         isWorking = true;
     }
 

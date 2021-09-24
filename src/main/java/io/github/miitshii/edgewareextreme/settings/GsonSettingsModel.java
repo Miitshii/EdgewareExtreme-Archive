@@ -16,12 +16,13 @@ public class GsonSettingsModel {
     private Double annoyanceFrequency;
     private Double annoyanceTimeout;
     private Double annoyanceMitosis;
+    private Double videoVolume;
+    private Double videoLimit;
 
     public Integer getPanicButton() {
         if (panicButton == null) return 0x20; // VK_SPACE
         return panicButton;
     }
-
     public final transient List<ISettingsListener<Integer>> panicButtonListeners = new ArrayList<>();
     public void setPanicButton(Integer newValue) {
         this.panicButton = newValue;
@@ -32,7 +33,6 @@ public class GsonSettingsModel {
         if (panicButtonModifiers == null) return 192; // Ctrl + Shift
         return panicButtonModifiers;
     }
-
     public final transient List<ISettingsListener<Integer>> panicButtonModifiersListeners = new ArrayList<>();
     public void setPanicButtonModifiers(Integer newValue) {
         this.panicButtonModifiers = newValue;
@@ -43,7 +43,6 @@ public class GsonSettingsModel {
         if (panicButtonEnabled == null) return true;
         return panicButtonEnabled;
     }
-
     public final transient List<ISettingsListener<Boolean>> panicButtonEnabledListeners = new ArrayList<>();
     public void setPanicButtonEnabled(Boolean newValue) {
         this.panicButtonEnabled = newValue;
@@ -54,7 +53,6 @@ public class GsonSettingsModel {
         if (mediaPath == null) return "./media";
         return mediaPath;
     }
-
     public final transient List<ISettingsListener<String>> mediaPathListeners = new ArrayList<>();
     public void setMediaPath(String newValue) {
         this.mediaPath = newValue;
@@ -72,7 +70,7 @@ public class GsonSettingsModel {
     }
 
     public Double getHibernateTimeMax() {
-        if (hibernateTimeMax == null) return 60000D;
+        if (hibernateTimeMax == null) return 5000D;
         return hibernateTimeMax;
     }
     public final transient List<ISettingsListener<Double>> hibernateTimeMaxListeners = new ArrayList<>();
@@ -95,7 +93,6 @@ public class GsonSettingsModel {
         if (annoyanceDelay == null) return 1000D;
         return annoyanceDelay;
     }
-
     public final transient List<ISettingsListener<Double>> annoyanceDelayListeners = new ArrayList<>();
     public void setAnnoyanceDelay(Double newValue) {
         this.annoyanceDelay = newValue;
@@ -106,7 +103,6 @@ public class GsonSettingsModel {
         if (annoyanceFrequency == null) return 50D;
         return annoyanceFrequency;
     }
-
     public final transient List<ISettingsListener<Double>> annoyanceFrequencyListeners = new ArrayList<>();
     public void setAnnoyanceFrequency(Double newValue) {
         this.annoyanceFrequency = newValue;
@@ -117,7 +113,6 @@ public class GsonSettingsModel {
         if (annoyanceTimeout == null) return 60000D;
         return annoyanceTimeout;
     }
-
     public final transient List<ISettingsListener<Double>> annoyanceTimeoutListeners = new ArrayList<>();
     public void setAnnoyanceTimeout(Double newValue) {
         this.annoyanceTimeout = newValue;
@@ -128,11 +123,32 @@ public class GsonSettingsModel {
         if (annoyanceMitosis == null) return 0D;
         return annoyanceMitosis;
     }
-
     public final transient List<ISettingsListener<Double>> annoyanceMitosisListeners = new ArrayList<>();
     public void setAnnoyanceMitosis(Double newValue) {
         this.annoyanceMitosis = newValue;
         annoyanceMitosisListeners.forEach(setting -> setting.onUpdated(newValue));
     }
+
+    public Double getVideoVolume() {
+        if (videoVolume == null) return 50D;
+        return videoVolume;
+    }
+    public final transient List<ISettingsListener<Double>> videoVoluneListeners = new ArrayList<>();
+    public void setVideoVolume(Double newValue) {
+        this.videoVolume = newValue;
+        videoVoluneListeners.forEach(setting -> setting.onUpdated(newValue));
+    }
+
+    public Double getVideoLimit() {
+        if (videoLimit == null) return 5D;
+        return videoLimit;
+    }
+    public final transient List<ISettingsListener<Double>> videoLimitListeners = new ArrayList<>();
+    public void setVideoLimit(Double newValue) {
+        this.videoLimit = newValue;
+        videoLimitListeners.forEach(setting -> setting.onUpdated(newValue));
+    }
+
+
 
 }

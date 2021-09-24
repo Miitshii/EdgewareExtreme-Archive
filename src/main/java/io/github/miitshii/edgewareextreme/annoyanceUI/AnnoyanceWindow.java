@@ -5,15 +5,21 @@ import io.github.miitshii.edgewareextreme.EdgewareExtreme;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public abstract class AnnoyanceWindow extends JDialog {
 
-    public AnnoyanceWindow() {
+    public static List<AnnoyanceWindow> VIDEOS = new ArrayList<>();
+
+    public AnnoyanceWindow() throws Exception {
         EdgewareExtreme.$.getPanicPerformedListeners().add(() -> panic());
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setAlwaysOnTop(true);
+        setFocusableWindowState(false);
+        setAutoRequestFocus(false);
     }
 
     public void setAutoSizeAndLocation(int width, int height) {
@@ -44,6 +50,8 @@ public abstract class AnnoyanceWindow extends JDialog {
     private void panic() {
         setVisible(false);
         dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+        dispose();
+        VIDEOS.remove(this);
     }
 
 }

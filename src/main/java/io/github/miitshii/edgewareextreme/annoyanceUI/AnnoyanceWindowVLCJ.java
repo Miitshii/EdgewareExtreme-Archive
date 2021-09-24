@@ -1,5 +1,7 @@
 package io.github.miitshii.edgewareextreme.annoyanceUI;
 
+import com.sun.javafx.geom.Edge;
+import io.github.miitshii.edgewareextreme.EdgewareExtreme;
 import uk.co.caprica.vlcj.media.Media;
 import uk.co.caprica.vlcj.media.MediaEventAdapter;
 import uk.co.caprica.vlcj.media.MediaParsedStatus;
@@ -11,14 +13,15 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Random;
 
-/**
- * @Deprecated performance for annoyance seems to be bad, use sparingly!
- */
-@Deprecated
 public class AnnoyanceWindowVLCJ extends AnnoyanceWindow {
 
-    public AnnoyanceWindowVLCJ() {
+    public AnnoyanceWindowVLCJ() throws Exception {
         super();
+
+        if (VIDEOS.size() >= EdgewareExtreme.$.getSettingsModel().getVideoLimit()) {
+            dispose();
+            throw new IllegalStateException("Too many videos");
+        }
 
         EmbeddedMediaPlayerComponent empc = new EmbeddedMediaPlayerComponent();
         getContentPane().add(empc);
@@ -32,7 +35,9 @@ public class AnnoyanceWindowVLCJ extends AnnoyanceWindow {
                 setAutoSizeAndLocation(vti0.width(), vti0.height());
 
                 setVisible(true);
+                VIDEOS.add(AnnoyanceWindowVLCJ.this);
                 empc.mediaPlayer().media().play(empc.mediaPlayer().media().newMediaRef());
+                empc.mediaPlayer().audio().setVolume((int) EdgewareExtreme.$.getSettingsModel().getVideoVolume().doubleValue());
                 empc.mediaPlayer().controls().setRepeat(true);
             }
         });
@@ -41,7 +46,6 @@ public class AnnoyanceWindowVLCJ extends AnnoyanceWindow {
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
-                System.out.println("Closed");
                 empc.mediaPlayer().release();
             }
         });

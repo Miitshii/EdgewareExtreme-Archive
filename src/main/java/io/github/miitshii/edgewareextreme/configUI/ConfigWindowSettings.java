@@ -68,6 +68,8 @@ public class ConfigWindowSettings extends JPanel {
         new SettingsSlider(m::getAnnoyanceFrequency, m::setAnnoyanceFrequency, m.annoyanceFrequencyListeners::add,"Popup Frequency (%)", 0, 100, annoyanceSettings, gbl, gridy++);
         new SettingsSlider(m::getAnnoyanceTimeout, m::setAnnoyanceTimeout, m.annoyanceTimeoutListeners::add,"Popup Timeout (ms)", 0, 60000, annoyanceSettings, gbl, gridy++);
         new SettingsSlider(m::getAnnoyanceMitosis, m::setAnnoyanceMitosis, m.annoyanceMitosisListeners::add,"Mitosis Amount", 0, 10, annoyanceSettings, gbl, gridy++);
+        new SettingsSlider(m::getVideoVolume, m::setVideoVolume, m.videoVoluneListeners::add,"Default Video Volume", 0, 100, annoyanceSettings, gbl, gridy++);
+        new SettingsSlider(m::getVideoLimit, m::setVideoLimit, m.videoLimitListeners::add,"Video Limit", 0, 10, annoyanceSettings, gbl, gridy++);
 
         add(annoyanceSettings);
         layout.setConstraints(annoyanceSettings, new BasicGBC(0, configGridY++, 1, 1, 1, 0, GridBagConstraints.HORIZONTAL, GridBagConstraints.NORTH));

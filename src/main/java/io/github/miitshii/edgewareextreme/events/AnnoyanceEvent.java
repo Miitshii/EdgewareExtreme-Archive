@@ -36,7 +36,7 @@ public class AnnoyanceEvent implements IEvent {
                     isWorking = false;
                     System.out.println("Annoyance Event done!");
                 }
-            }, (long) EdgewareExtreme.$.getSettingsModel().getAnnoyanceDelay().doubleValue());
+            }, Math.max(1, (long) EdgewareExtreme.$.getSettingsModel().getAnnoyanceDelay().doubleValue()));
         }
     }
 
