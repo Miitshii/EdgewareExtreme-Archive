@@ -3,8 +3,9 @@ package io.github.miitshii.edgewareextreme;
 import com.formdev.flatlaf.FlatLightLaf;
 import io.github.miitshii.edgewareextreme.configUI.ConfigWindow;
 import io.github.miitshii.edgewareextreme.events.DefaultTimeline;
-import io.github.miitshii.edgewareextreme.settings.GsonSettings;
-import io.github.miitshii.edgewareextreme.settings.GsonSettingsModel;
+import io.github.miitshii.edgewareextreme.media.MediaManager;
+import io.github.miitshii.edgewareextreme.settings.SettingsManager;
+import io.github.miitshii.edgewareextreme.settings.SettingsModel;
 import lombok.Getter;
 
 import javax.swing.*;
@@ -17,14 +18,16 @@ public class EdgewareExtreme {
     public static EdgewareExtreme $;
 
     @Getter
-    private GsonSettings gsonSettings;
-    public GsonSettingsModel getSettingsModel() {
-        return gsonSettings.getModel();
+    private SettingsManager settingsManager;
+    public SettingsModel getSettingsModel() {
+        return settingsManager.getModel();
     }
     @Getter
     private ConfigWindow configWindow;
     @Getter
     private PanicButtonListener panicButtonListener;
+    @Getter
+    private MediaManager mediaManager;
     @Getter
     private List<IPanicPerformedListener> panicPerformedListeners = new ArrayList<>();
     @Getter
@@ -44,8 +47,9 @@ public class EdgewareExtreme {
             e.printStackTrace();
         }
 
-        gsonSettings = new GsonSettings();
+        settingsManager = new SettingsManager();
         configWindow = new ConfigWindow();
+        mediaManager = new MediaManager();
         panicButtonListener = new PanicButtonListener();
         defaultTimeline = new DefaultTimeline();
     }

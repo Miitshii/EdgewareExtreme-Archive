@@ -18,7 +18,6 @@ public abstract class AnnoyanceWindow extends JDialog {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setAlwaysOnTop(true);
-        setFocusableWindowState(false);
         setAutoRequestFocus(false);
     }
 
@@ -47,11 +46,10 @@ public abstract class AnnoyanceWindow extends JDialog {
         setLocation(randomX, randomY);
     }
 
-    private void panic() {
+    public void panic() {
         setVisible(false);
-        dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
-        dispose();
         VIDEOS.remove(this);
+        dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSED));
     }
 
 }

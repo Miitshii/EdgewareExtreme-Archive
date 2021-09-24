@@ -9,13 +9,13 @@ import java.awt.event.MouseEvent;
 import java.util.concurrent.Callable;
 import java.util.function.Consumer;
 
-public class SettingsSlider extends AbstractSetting<Double> {
+public class SettingSlider extends AbstractSetting<Double> {
 
     private JLabel label;
     private JSlider slider;
     private JSpinner spinner;
 
-    public SettingsSlider(Callable<Double> get, Consumer<Double> set, Consumer<AbstractSetting<Double>> addListener, String text, double min, double max, JPanel container, GridBagLayout gbl, int gridY) {
+    public SettingSlider(Callable<Double> get, Consumer<Double> set, Consumer<AbstractSetting<Double>> addListener, String text, double min, double max, JPanel container, GridBagLayout gbl, int gridY) {
         try {
             setGet(get);
             setSet(set);
@@ -51,7 +51,7 @@ public class SettingsSlider extends AbstractSetting<Double> {
         setValue(newValue);
 
         if (save) {
-            EdgewareExtreme.$.getGsonSettings().saveConfig();
+            EdgewareExtreme.$.getSettingsManager().saveConfig();
         }
     }
 

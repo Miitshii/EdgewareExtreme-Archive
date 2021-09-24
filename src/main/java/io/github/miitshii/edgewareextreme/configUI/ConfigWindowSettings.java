@@ -45,12 +45,12 @@ public class ConfigWindowSettings extends JPanel {
         generalSettings.setBorder(new CompoundBorder(new TitledBorder(BorderFactory.createLineBorder(UIManager.getColor("Borders.color")), "General Settings"), new EmptyBorder(5, 5, 5, 5)));
 
         int gridy = 0;
-        final GsonSettingsModel m = EdgewareExtreme.$.getSettingsModel();
+        final SettingsModel m = EdgewareExtreme.$.getSettingsModel();
         new SettingPanic(generalSettings, gbl, gridy++);
         new SettingFile(m::getMediaPath, m::setMediaPath, m.mediaPathListeners::add, "Media Path", generalSettings, gbl, gridy++);
-        new SettingsSlider(m::getHibernateTimeMin, m::setHibernateTimeMin, m.hibernateTimeMinListeners::add, "Hibernate Time Min (ms)", 0, 60000, generalSettings, gbl, gridy++);
-        new SettingsSlider(m::getHibernateTimeMax, m::setHibernateTimeMax, m.hibernateTimeMaxListeners::add, "Hibernate Time Max (ms)", 0, 60000, generalSettings, gbl, gridy++);
-        new SettingsSlider(m::getHibernateRepeats, m::setHibernateRepeats, m.hibernateRepeatsListeners::add, "Hibernate Activity", 1, 10, generalSettings, gbl, gridy++);
+        new SettingSlider(m::getHibernateTimeMin, m::setHibernateTimeMin, m.hibernateTimeMinListeners::add, "Hibernate Time Min (ms)", 0, 60000, generalSettings, gbl, gridy++);
+        new SettingSlider(m::getHibernateTimeMax, m::setHibernateTimeMax, m.hibernateTimeMaxListeners::add, "Hibernate Time Max (ms)", 0, 60000, generalSettings, gbl, gridy++);
+        new SettingSlider(m::getHibernateRepeats, m::setHibernateRepeats, m.hibernateRepeatsListeners::add, "Hibernate Activity", 1, 10, generalSettings, gbl, gridy++);
 
         add(generalSettings);
         layout.setConstraints(generalSettings, new BasicGBC(0, configGridY++, 1, 1, 1, 0, GridBagConstraints.HORIZONTAL, GridBagConstraints.NORTH));
@@ -63,13 +63,13 @@ public class ConfigWindowSettings extends JPanel {
         annoyanceSettings.setBorder(new CompoundBorder(new TitledBorder(BorderFactory.createLineBorder(UIManager.getColor("Borders.color")), "Annoyance"), new EmptyBorder(5, 5, 5, 5)));
 
         int gridy = 0;
-        final GsonSettingsModel m = EdgewareExtreme.$.getSettingsModel();
-        new SettingsSlider(m::getAnnoyanceDelay, m::setAnnoyanceDelay, m.annoyanceDelayListeners::add, "Time Delay (ms)", 10, 60000, annoyanceSettings, gbl, gridy++);
-        new SettingsSlider(m::getAnnoyanceFrequency, m::setAnnoyanceFrequency, m.annoyanceFrequencyListeners::add,"Popup Frequency (%)", 0, 100, annoyanceSettings, gbl, gridy++);
-        new SettingsSlider(m::getAnnoyanceTimeout, m::setAnnoyanceTimeout, m.annoyanceTimeoutListeners::add,"Popup Timeout (ms)", 0, 60000, annoyanceSettings, gbl, gridy++);
-        new SettingsSlider(m::getAnnoyanceMitosis, m::setAnnoyanceMitosis, m.annoyanceMitosisListeners::add,"Mitosis Amount", 0, 10, annoyanceSettings, gbl, gridy++);
-        new SettingsSlider(m::getVideoVolume, m::setVideoVolume, m.videoVoluneListeners::add,"Default Video Volume", 0, 100, annoyanceSettings, gbl, gridy++);
-        new SettingsSlider(m::getVideoLimit, m::setVideoLimit, m.videoLimitListeners::add,"Video Limit", 0, 10, annoyanceSettings, gbl, gridy++);
+        final SettingsModel m = EdgewareExtreme.$.getSettingsModel();
+        new SettingSlider(m::getAnnoyanceDelay, m::setAnnoyanceDelay, m.annoyanceDelayListeners::add, "Time Delay (ms)", 10, 60000, annoyanceSettings, gbl, gridy++);
+        new SettingSlider(m::getAnnoyanceFrequency, m::setAnnoyanceFrequency, m.annoyanceFrequencyListeners::add,"Popup Frequency (%)", 0, 100, annoyanceSettings, gbl, gridy++);
+        new SettingSlider(m::getAnnoyanceTimeout, m::setAnnoyanceTimeout, m.annoyanceTimeoutListeners::add,"Popup Timeout (ms)", 0, 60000, annoyanceSettings, gbl, gridy++);
+        new SettingSlider(m::getAnnoyanceMitosis, m::setAnnoyanceMitosis, m.annoyanceMitosisListeners::add,"Mitosis Amount", 0, 10, annoyanceSettings, gbl, gridy++);
+        new SettingSlider(m::getVideoVolume, m::setVideoVolume, m.videoVoluneListeners::add,"Default Video Volume", 0, 100, annoyanceSettings, gbl, gridy++);
+        new SettingSlider(m::getVideoLimit, m::setVideoLimit, m.videoLimitListeners::add,"Video Limit", 0, 10, annoyanceSettings, gbl, gridy++);
 
         add(annoyanceSettings);
         layout.setConstraints(annoyanceSettings, new BasicGBC(0, configGridY++, 1, 1, 1, 0, GridBagConstraints.HORIZONTAL, GridBagConstraints.NORTH));

@@ -3,7 +3,7 @@ package io.github.miitshii.edgewareextreme.settings;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GsonSettingsModel {
+public class SettingsModel {
 
     private Integer panicButton;
     private Integer panicButtonModifiers;

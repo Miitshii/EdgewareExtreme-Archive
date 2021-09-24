@@ -7,14 +7,14 @@ import lombok.Getter;
 
 import java.io.*;
 
-public class GsonSettings {
+public class SettingsManager {
 
     private static final String FILENAME = "edgewareExtreme.json";
 
     @Getter
-    private GsonSettingsModel model;
+    private SettingsModel model;
 
-    public GsonSettings() {
+    public SettingsManager() {
         loadConfig();
     }
 
@@ -24,13 +24,13 @@ public class GsonSettings {
             if (f.exists()) {
                 JsonReader reader = new JsonReader(new FileReader(f));
                 Gson gson = new GsonBuilder().setPrettyPrinting().create();
-                model = gson.fromJson(reader, GsonSettingsModel.class);
+                model = gson.fromJson(reader, SettingsModel.class);
                 if (model == null) {
-                    model = new GsonSettingsModel();
+                    model = new SettingsModel();
                 }
                 reader.close();
             } else {
-                model = new GsonSettingsModel();
+                model = new SettingsModel();
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -43,7 +43,7 @@ public class GsonSettings {
         try {
             Gson gson = new GsonBuilder().setPrettyPrinting().create();
             FileWriter fw = new FileWriter(new File(FILENAME));
-            gson.toJson(model, GsonSettingsModel.class, fw);
+            gson.toJson(model, SettingsModel.class, fw);
             fw.flush();
             fw.close();
         } catch (IOException e) {

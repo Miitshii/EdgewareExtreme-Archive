@@ -6,8 +6,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.util.concurrent.Callable;
-import java.util.function.Consumer;
 
 public class SettingPanic extends AbstractSetting<Object> {
 
@@ -55,7 +53,7 @@ public class SettingPanic extends AbstractSetting<Object> {
             gbl.setConstraints(checkbox, new BasicGBC(2, gridY, 1, 1, 0, 0, GridBagConstraints.HORIZONTAL, GridBagConstraints.EAST));
             checkbox.addChangeListener(e -> {
                 EdgewareExtreme.$.getSettingsModel().setPanicButtonEnabled(checkbox.isSelected());
-                EdgewareExtreme.$.getGsonSettings().saveConfig();
+                EdgewareExtreme.$.getSettingsManager().saveConfig();
             });
             container.add(checkbox);
         } catch (Exception e) {
@@ -78,7 +76,7 @@ public class SettingPanic extends AbstractSetting<Object> {
         input.setText(panicToString());
 
         if (save) {
-            EdgewareExtreme.$.getGsonSettings().saveConfig();
+            EdgewareExtreme.$.getSettingsManager().saveConfig();
         }
     }
 

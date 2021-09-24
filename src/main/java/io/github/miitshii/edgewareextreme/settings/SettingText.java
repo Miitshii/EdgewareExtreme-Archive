@@ -6,8 +6,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.util.concurrent.Callable;
 import java.util.function.Consumer;
 
@@ -49,7 +47,7 @@ public class SettingText extends AbstractSetting<String> {
         setValue(newValue);
 
         if (save) {
-            EdgewareExtreme.$.getGsonSettings().saveConfig();
+            EdgewareExtreme.$.getSettingsManager().saveConfig();
         }
     }
 

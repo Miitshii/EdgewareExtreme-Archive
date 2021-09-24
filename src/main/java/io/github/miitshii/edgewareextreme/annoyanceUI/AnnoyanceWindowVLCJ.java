@@ -11,6 +11,7 @@ import uk.co.caprica.vlcj.player.component.EmbeddedMediaPlayerComponent;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.net.URI;
 import java.util.Random;
 
 public class AnnoyanceWindowVLCJ extends AnnoyanceWindow {
@@ -20,13 +21,14 @@ public class AnnoyanceWindowVLCJ extends AnnoyanceWindow {
 
         if (VIDEOS.size() >= EdgewareExtreme.$.getSettingsModel().getVideoLimit()) {
             dispose();
-            throw new IllegalStateException("Too many videos");
+            throw new TooManyVideosException();
         }
 
         EmbeddedMediaPlayerComponent empc = new EmbeddedMediaPlayerComponent();
         getContentPane().add(empc);
-        String url = "D:\\Große Dateien\\rips\\rule34_hyper_muscles\\002_b412ebdccaa45889da71444c65e8bffb.jpeg";
-        empc.mediaPlayer().media().prepare(url);
+
+        URI uri = EdgewareExtreme.$.getMediaManager().getRandomVLCJVideo();
+        empc.mediaPlayer().media().prepare(uri.toString());
         empc.mediaPlayer().media().events().addMediaEventListener(new MediaEventAdapter() {
             @Override
             public void mediaParsedChanged(Media media, MediaParsedStatus newStatus) {

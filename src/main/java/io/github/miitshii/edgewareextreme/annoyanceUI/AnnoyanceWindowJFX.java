@@ -17,6 +17,8 @@ import javafx.util.Duration;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.util.Random;
 
@@ -27,17 +29,12 @@ public class AnnoyanceWindowJFX extends AnnoyanceWindow {
 
         if (VIDEOS.size() >= EdgewareExtreme.$.getSettingsModel().getVideoLimit()) {
             dispose();
-            throw new IllegalStateException("Too many videos");
+            throw new TooManyVideosException();
         }
 
         JFXPanel VFXPanel = new JFXPanel();
 
-        // TODO manager
-        File dir = new File("D:\\2021-06-20\\Downloads\\Edgeware-main\\Edgeware-main\\EdgeWare\\resource\\vid");
-        Random r = new Random();
-        File video_source = dir.listFiles()[r.nextInt(dir.listFiles().length)];
-
-        Media media = new Media(video_source.toURI().toString());
+        Media media = new Media(EdgewareExtreme.$.getMediaManager().getRandomJFXVideo().toString());
         MediaPlayer player = new MediaPlayer(media);
         MediaView viewer = new MediaView(player);
 
@@ -72,6 +69,14 @@ public class AnnoyanceWindowJFX extends AnnoyanceWindow {
 
             setVisible(true);
             VIDEOS.add(this);
+        });
+
+        addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                player.stop();
+                player.dispose();
+            }
         });
     }
 
