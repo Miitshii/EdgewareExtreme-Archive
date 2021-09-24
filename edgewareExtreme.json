@@ -1,10 +1,10 @@
 {
   "panicButtonEnabled": true,
   "mediaPath": "D:\\Große Dateien\\rips",
-  "hibernateTimeMin": 2222.0,
-  "hibernateTimeMax": 3210.0,
-  "hibernateRepeats": 5.0,
-  "annoyanceDelay": 3685.0,
-  "annoyanceFrequency": 14.0,
+  "hibernateTimeMin": 1111.0,
+  "hibernateTimeMax": 2222.0,
+  "hibernateRepeats": 10.0,
+  "annoyanceDelay": 1907.0,
+  "annoyanceFrequency": 100.0,
   "annoyanceTimeout": 60000.0
 }

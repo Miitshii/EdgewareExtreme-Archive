@@ -39,6 +39,21 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>uk.co.caprica</groupId>
+            <artifactId>vlcj</artifactId>
+            <version>4.6.0</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/org.openjfx/javafx -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx</artifactId>
+            <version>11</version>
+            <type>pom</type>
+        </dependency>
+
+
     </dependencies>
     
 </project>

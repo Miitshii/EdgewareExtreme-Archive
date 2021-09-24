@@ -2,6 +2,7 @@ package io.github.miitshii.edgewareextreme.events;
 
 import io.github.miitshii.edgewareextreme.EdgewareExtreme;
 import io.github.miitshii.edgewareextreme.annoyanceUI.AnnoyanceWindow;
+import io.github.miitshii.edgewareextreme.annoyanceUI.AnnoyanceWindowJFX;
 
 import java.util.Random;
 import java.util.Timer;
@@ -20,7 +21,12 @@ public class AnnoyanceEvent implements IEvent {
         if (r.nextDouble() <= chance/100D) {
             isWorking = true;
 
-            new AnnoyanceWindow();
+            try {
+                new AnnoyanceWindowJFX();
+            } catch (Exception e) {
+                // literally anything could go wrong with media
+                e.printStackTrace();
+            }
 
             Timer t = new Timer();
             if (delayTask != null) delayTask.cancel();

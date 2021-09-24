@@ -50,7 +50,7 @@ public class ConfigWindowSettings extends JPanel {
         new SettingFile(m::getMediaPath, m::setMediaPath, m.mediaPathListeners::add, "Media Path", generalSettings, gbl, gridy++);
         new SettingsSlider(m::getHibernateTimeMin, m::setHibernateTimeMin, m.hibernateTimeMinListeners::add, "Hibernate Time Min (ms)", 0, 60000, generalSettings, gbl, gridy++);
         new SettingsSlider(m::getHibernateTimeMax, m::setHibernateTimeMax, m.hibernateTimeMaxListeners::add, "Hibernate Time Max (ms)", 0, 60000, generalSettings, gbl, gridy++);
-        new SettingsSlider(m::getHibernateRepeats, m::setHibernateRepeats, m.hibernateRepeatsListeners::add, "Hibernate Activity", 0, 10, generalSettings, gbl, gridy++);
+        new SettingsSlider(m::getHibernateRepeats, m::setHibernateRepeats, m.hibernateRepeatsListeners::add, "Hibernate Activity", 1, 10, generalSettings, gbl, gridy++);
 
         add(generalSettings);
         layout.setConstraints(generalSettings, new BasicGBC(0, configGridY++, 1, 1, 1, 0, GridBagConstraints.HORIZONTAL, GridBagConstraints.NORTH));
