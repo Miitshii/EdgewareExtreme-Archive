@@ -18,7 +18,7 @@ public class MediaManager {
     private List<URI> vlcjVideos = new ArrayList<>();
     private List<URI> jfxAudios = new ArrayList<>();
     private List<URI> vlcjAudios = new ArrayList<>();
-    private List<URI> images = new ArrayList<java.net.URI>();
+    private List<URI> jLabelImage = new ArrayList<java.net.URI>();
 
     public MediaManager() {
         EdgewareExtreme.$.getSettingsModel().mediaPathListeners.add(newValue -> loadMedia());
@@ -30,7 +30,7 @@ public class MediaManager {
         vlcjVideos.clear();
         jfxAudios.clear();
         vlcjAudios.clear();
-        images.clear();
+        jLabelImage.clear();
 
         File mediaDir = new File(EdgewareExtreme.$.getSettingsModel().getMediaPath());
         if (!mediaDir.exists()) mediaDir.mkdirs();
@@ -46,7 +46,7 @@ public class MediaManager {
                 String extension = lowerName.substring(lowerName.lastIndexOf(".")+1);
                 switch (extension) {
                     case "jpg": case "jpeg": case "png": case "gif":
-                        images.add(file.toURI());
+                        jLabelImage.add(file.toURI());
                         break;
                     case "aiff": case "hls": case "mp3":
                         jfxAudios.add(file.toURI());
@@ -73,6 +73,11 @@ public class MediaManager {
     public URI getRandomVLCJVideo() {
         Random r = new Random();
         return vlcjVideos.get(r.nextInt(vlcjVideos.size()));
+    }
+
+    public URI getRandomJLabelImage() {
+        Random r = new Random();
+        return jLabelImage.get(r.nextInt(jLabelImage.size()));
     }
 
 }
