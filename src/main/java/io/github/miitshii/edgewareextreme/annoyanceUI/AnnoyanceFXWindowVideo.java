@@ -20,22 +20,24 @@ import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
-public class AnnoyanceWindowJFX extends AnnoyanceWindow {
+public class AnnoyanceFXWindowVideo extends AnnoyanceFXWindow {
 
-    public AnnoyanceWindowJFX() throws Exception {
+    private final MediaPlayer player;
+
+    public AnnoyanceFXWindowVideo() throws Exception {
         super();
 
         if (VIDEOS.size() >= EdgewareExtreme.$.getSettingsModel().getVideoLimit()) {
-            dispose();
             throw new TooManyVideosException();
         }
-
-        JFXPanel VFXPanel = new JFXPanel();
+        VIDEOS.add(this);
 
         Media media = new Media(EdgewareExtreme.$.getMediaManager().getRandomJFXVideo().toString());
-        MediaPlayer player = new MediaPlayer(media);
+        player = new MediaPlayer(media);
         MediaView viewer = new MediaView(player);
 
         StackPane root = new StackPane();
@@ -51,10 +53,6 @@ public class AnnoyanceWindowJFX extends AnnoyanceWindow {
         // add video to stackpane
         root.getChildren().add(viewer);
 
-        VFXPanel.setScene(scene);
-        setLayout(new BorderLayout());
-        add(VFXPanel, BorderLayout.CENTER);
-
         // loop
         player.setOnEndOfMedia(() -> {
             player.seek(Duration.ZERO);
@@ -67,17 +65,17 @@ public class AnnoyanceWindowJFX extends AnnoyanceWindow {
             viewer.getMediaPlayer().play();
             viewer.getMediaPlayer().setVolume(EdgewareExtreme.$.getSettingsModel().getVideoVolume()/100D);
 
-            setVisible(true);
-            VIDEOS.add(this);
+            show();
         });
 
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                player.stop();
-                player.dispose();
-            }
-        });
+        setScene(scene);
     }
 
+    @Override
+    public void close() {
+        super.close();
+        player.stop();
+        player.dispose();
+        VIDEOS.remove(this);
+    }
 }

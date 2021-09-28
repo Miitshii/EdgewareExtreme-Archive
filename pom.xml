@@ -55,5 +55,14 @@
 
 
     </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
     
 </project>

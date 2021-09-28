@@ -7,6 +7,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
+/**
+ * @Deprecated Swing is having issues with spamming so many windows
+ */
+@Deprecated
 public class AnnoyanceWindowJLabel extends AnnoyanceWindow {
 
     public AnnoyanceWindowJLabel() throws Exception {

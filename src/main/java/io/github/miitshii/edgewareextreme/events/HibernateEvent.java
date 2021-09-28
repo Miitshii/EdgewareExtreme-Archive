@@ -15,6 +15,7 @@ public class HibernateEvent implements IEvent {
     @Override
     public void executeEvent(Timeline timeline) {
         System.out.println("Hibernate Event executed!");
+        isWorking = true;
 
         for (int i = 0; i < EdgewareExtreme.$.getSettingsModel().getHibernateRepeats(); i++) {
             timeline.addToQueue(new AnnoyanceEvent(), HibernateEvent.this);
@@ -31,8 +32,7 @@ public class HibernateEvent implements IEvent {
                 isWorking = false;
                 System.out.println("Hibernate Event done!");
             }
-        }, Math.max(1, min + r.nextInt((int) (max - min))));
-        isWorking = true;
+        }, Math.max(0, min + r.nextInt((int) Math.max(1, max - min))));
     }
 
     @Override

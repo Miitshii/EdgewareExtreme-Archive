@@ -1,5 +1,7 @@
 package io.github.miitshii.edgewareextreme.events;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import io.github.miitshii.edgewareextreme.EdgewareExtreme;
 import lombok.Getter;
 import lombok.SneakyThrows;
@@ -40,7 +42,7 @@ public abstract class Timeline extends Thread {
     public void run() {
         System.out.println("Running!");
         while (true) {
-            Thread.sleep(10); // 100 times a sec ; otherwise thread will get stuck?
+            Thread.sleep(1); // 100 times a sec ; otherwise thread will get stuck?
             if (running) {
                 if (atCurrentEntry >= currentQueue.size()) {
                     // reached end, reset
@@ -66,11 +68,12 @@ public abstract class Timeline extends Thread {
         currentQueue.add(currentQueue.indexOf(parent)+1, add);
     }
 
-    public void stopAll() {
+    public synchronized void stopAll() {
         System.out.println("Stopping Timeline");
         running = false;
         getCurrentEvent().cancelEvent();
         currentQueue = new ArrayList<>(originalQueue);
+        atCurrentEntry = 0;
     }
 
 }

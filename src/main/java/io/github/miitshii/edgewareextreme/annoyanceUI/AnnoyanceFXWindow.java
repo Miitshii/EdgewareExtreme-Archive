@@ -1,29 +1,28 @@
 package io.github.miitshii.edgewareextreme.annoyanceUI;
 
 import io.github.miitshii.edgewareextreme.EdgewareExtreme;
+import javafx.application.Platform;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowEvent;
-import java.util.*;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Timer;
+import java.util.Random;
 
-/**
- * @Deprecated Swing is having issues with spamming so many windows
- */
-@Deprecated
-public abstract class AnnoyanceWindow extends JDialog {
+public abstract class AnnoyanceFXWindow extends Stage {
 
-    public static List<AnnoyanceWindow> VIDEOS = new ArrayList<>();
+    protected static volatile List<AnnoyanceFXWindowVideo> VIDEOS = new ArrayList<>();
 
-    public AnnoyanceWindow() throws Exception {
-        EdgewareExtreme.$.getPanicPerformedListeners().add(() -> panic());
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setUndecorated(true);
+    /**
+     *
+     * @throws Exception literally anything could go wrong with media
+     */
+    public AnnoyanceFXWindow() throws Exception {
+        EdgewareExtreme.$.getPanicPerformedListeners().add(() -> close());
+        initStyle(StageStyle.UNDECORATED);
         setAlwaysOnTop(true);
-        setAutoRequestFocus(false);
-        toFront();
     }
 
     public void setAutoSizeAndLocation(int width, int height) {
@@ -31,7 +30,6 @@ public abstract class AnnoyanceWindow extends JDialog {
         GraphicsDevice[] devices = graphicsEnvironment.getScreenDevices();
         Random r = new Random();
         int i = r.nextInt(devices.length);
-        System.out.println(i);
         GraphicsDevice device = devices[i];
 
         Rectangle bounds = device.getDefaultConfiguration().getBounds();
@@ -44,17 +42,20 @@ public abstract class AnnoyanceWindow extends JDialog {
             width /= 2;
             height /= 2;
         }
-        setSize(width, height);
+        setWidth(width);
+        setHeight(height);
 
         int randomX = bounds.x + r.nextInt(bounds.width-width);
         int randomY = bounds.y + r.nextInt(bounds.height-height);
-        setLocation(randomX, randomY);
+        setX(randomX);
+        setY(randomY);
     }
 
-    public void panic() {
-        setVisible(false);
-        VIDEOS.remove(this);
-        dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSED));
+    @Override
+    public void close() {
+        Platform.runLater(() -> {
+            super.close();
+        });
     }
 
 }

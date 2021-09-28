@@ -1,10 +1,10 @@
 package io.github.miitshii.edgewareextreme.events;
 
 import io.github.miitshii.edgewareextreme.EdgewareExtreme;
-import io.github.miitshii.edgewareextreme.annoyanceUI.AnnoyanceWindow;
-import io.github.miitshii.edgewareextreme.annoyanceUI.AnnoyanceWindowJFX;
-import io.github.miitshii.edgewareextreme.annoyanceUI.AnnoyanceWindowJLabel;
-import io.github.miitshii.edgewareextreme.annoyanceUI.TooManyVideosException;
+import io.github.miitshii.edgewareextreme.PanicButtonListener;
+import io.github.miitshii.edgewareextreme.annoyanceUI.*;
+import javafx.application.Platform;
+import javafx.embed.swing.JFXPanel;
 
 import java.util.Random;
 import java.util.Timer;
@@ -23,17 +23,19 @@ public class AnnoyanceEvent implements IEvent {
         if (r.nextDouble() <= chance/100D) {
             isWorking = true;
 
-            // attempt 10 times
-            for (int i = 0; i < 10; i++) {
-                try {
-                    new AnnoyanceWindowJLabel();
-                    break;
-                } catch (Exception e) {
-                    // literally anything could go wrong with media
-                    if (!(e instanceof TooManyVideosException))
-                        e.printStackTrace();
+            Platform.runLater(() -> {
+                // attempt 10 times
+                for (int i = 0; i < 10; i++) {
+                    try {
+                        new AnnoyanceFXWindowVideo();
+                        break;
+                    } catch (Exception e) {
+                        // literally anything could go wrong with media
+                        if (!(e instanceof TooManyVideosException))
+                            e.printStackTrace();
+                    }
                 }
-            }
+            });
 
             Timer t = new Timer();
             if (delayTask != null) delayTask.cancel();
@@ -43,7 +45,7 @@ public class AnnoyanceEvent implements IEvent {
                     isWorking = false;
                     System.out.println("Annoyance Event done!");
                 }
-            }, Math.max(1, (long) EdgewareExtreme.$.getSettingsModel().getAnnoyanceDelay().doubleValue()));
+            }, Math.max(0, (long) EdgewareExtreme.$.getSettingsModel().getAnnoyanceDelay().doubleValue()));
         }
     }
 

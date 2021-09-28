@@ -6,6 +6,8 @@ import io.github.miitshii.edgewareextreme.events.DefaultTimeline;
 import io.github.miitshii.edgewareextreme.media.MediaManager;
 import io.github.miitshii.edgewareextreme.settings.SettingsManager;
 import io.github.miitshii.edgewareextreme.settings.SettingsModel;
+import javafx.application.Platform;
+import javafx.embed.swing.JFXPanel;
 import lombok.Getter;
 
 import javax.swing.*;
@@ -47,6 +49,8 @@ public class EdgewareExtreme {
             e.printStackTrace();
         }
 
+        Platform.startup(() -> {}); // initialise javafx
+        Platform.setImplicitExit(false);
         settingsManager = new SettingsManager();
         configWindow = new ConfigWindow();
         mediaManager = new MediaManager();
