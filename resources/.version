@@ -1,1 +1,2 @@
-${project.version}
+version=${project.version}
+artifactId=${project.artifactId}
